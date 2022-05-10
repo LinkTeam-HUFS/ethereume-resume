@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TestPage from '../views/TestPage'
 
-
 const routes = [
   {
     path: '/',
