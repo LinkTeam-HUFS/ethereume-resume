@@ -6,6 +6,7 @@
         current address:{{$store.state.address}}
     </div>
     <div class="container">
+    ===================================================================================================================================
         <h1>이력서 작성</h1>
         <h2>인적사항</h2>
         <input
@@ -116,15 +117,24 @@
             type="text" 
             placeholder="취득일자"
         />
+        <div>
+            <button class="button is-primary" @click="setValue">이력서 작성</button>
+        </div>
         <h1>{{loading}}</h1>
+        ===================================================================================================================================
+        <h1>이력서 목록</h1>
         <div>
             <li v-for="(resume,index) in $store.state.resumeList" :key="resume.key">
+                <div v-if="index % 4 ==0 && $store.state.isMetaMaskConnected == true">
+                --------------------------------------------------------------------------------------------------------------------
+                    <div>-{{(index / 4) + 1}}-</div>
+                </div>
                 {{$store.state.resumeList[index]}}
+                <div v-if="index % 4 == 3">
+                    <button>이력서 수정</button>
+                </div>
             </li>
-        </div>
-        
-        <button class="button is-primary" @click="setValue">이력서 작성</button>
-        <button @click="Test">Back</button>
+        </div>        
     </div>
 </div>
 </template>
@@ -338,6 +348,8 @@
     };
 </script>
 
-<style scoped lang="scss">
-    
+<style>
+li {
+    list-style:none;
+}
 </style>

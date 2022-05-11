@@ -6,21 +6,6 @@
 npm install
 npm install ganache-cli
 npm install -g truffle
-firebase install
-firebase init
-```
-
-### Firesbase deploy
-
-```
-npm run build
-firebase deploy
-```
-
-### Firebase test
-
-```
-firebase emulators:start
 ```
 
 ### Make .env at root directory
