@@ -1,11 +1,27 @@
 <template>
+<div class="background" v-if="isResumeOpen == true"> 
+    <div class="modal">
+        <div>
+            <button class="close" @click="[isResumeOpen = false,currentIndex = 0]">닫기</button>
+            <div>
+                {{$store.state.resumeList[currentIndex*4]}}
+                <br>
+                {{$store.state.resumeList[currentIndex*4 + 1]}}
+                <br>
+                {{$store.state.resumeList[currentIndex*4 + 2]}}
+                <br>
+                {{$store.state.resumeList[currentIndex*4 + 3]}}
+            </div>
+        </div>                   
+    </div>    
+</div>
 <div style="overflow:auto">
     <h1 v-if="$store.state.isMetaMaskConnected == true">MetaMask Connected!!</h1>
     <button v-if="$store.state.isMetaMaskConnected == false" @click="connectWallet">MetaMask Connection</button>
     <div>
         current address:{{$store.state.address}}
     </div>
-    <div class="container">
+    <div>
     ===================================================================================================================================
         <h1>이력서 작성</h1>
         <h2>인적사항</h2>
@@ -121,6 +137,7 @@
             <button class="button is-primary" @click="setValue">이력서 작성</button>
         </div>
         <h1>{{loading}}</h1>
+        <!-- 이력서 목록 표시 -->
         ===================================================================================================================================
         <h1>이력서 목록</h1>
         <div>
@@ -131,7 +148,7 @@
                 </div>
                 {{$store.state.resumeList[index]}}
                 <div v-if="index % 4 == 3">
-                    <button>이력서 수정</button>
+                    <button @click="[isResumeOpen = true, currentIndex = ((index - 3)/4)]">이력서 수정</button>
                 </div>
             </li>
         </div>        
@@ -185,6 +202,8 @@
                 //ContractJson
                 contractJson: ResumeContract,
                 loading: "",
+                isResumeOpen: false,
+                currentIndex: 0
             };
         },
         methods: {
@@ -349,7 +368,27 @@
 </script>
 
 <style>
+body{
+    margin : 0;
+}
 li {
     list-style:none;
+}
+.background {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: fixed;
+}
+.modal {
+    width: 500px;
+    height: 600px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 </style>
