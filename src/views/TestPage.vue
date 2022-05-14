@@ -1,20 +1,150 @@
 <template>
+<!-- 이력서 수정페이지 -->
 <div class="background" v-if="isResumeOpen == true"> 
     <div class="modal">
         <div>
-            <button class="close" @click="[isResumeOpen = false,currentIndex = 0]">닫기</button>
+            <button class="close" @click="resumeClosed">닫기</button>
             <div>
-                {{$store.state.resumeList[currentIndex*4]}}
+                <h2>인적사항</h2>
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].picUrl"
+                    @input="$store.state.resumeList[currentIndex*4].picUrl = $event.target.value"
+                    type="text" 
+                    placeholder="picUrl"
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].name"
+                    @input="$store.state.resumeList[currentIndex*4].name = $event.target.value"
+                    type="text" 
+                    placeholder="name"
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].phone"
+                    @input="$store.state.resumeList[currentIndex*4].phone = $event.target.value"
+                    type="text" 
+                    placeholder="phone"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].email"
+                    @input="$store.state.resumeList[currentIndex*4].email = $event.target.value"
+                    type="text" 
+                    placeholder="email"                   
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].dateOfBirth"
+                    @input="$store.state.resumeList[currentIndex*4].dateOfBirth = $event.target.value"
+                    type="text" 
+                    placeholder="dateOfBirth"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].socialUrl"
+                    @input="$store.state.resumeList[currentIndex*4].socialUrl = $event.target.value"
+                    type="text" 
+                    placeholder="socialUrl"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].location"
+                    @input="$store.state.resumeList[currentIndex*4].location = $event.target.value"
+                    type="text" 
+                    placeholder="location"                    
+                />
                 <br>
-                {{$store.state.resumeList[currentIndex*4 + 1]}}
+                <h2>학력사항</h2>
+                <input
+                    :value="$store.state.resumeList[currentIndex*4 + 1].startDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].startDate = $event.target.value"
+                    type="text" 
+                    placeholder="startDate"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].endDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].endDate = $event.target.value"
+                    type="text" 
+                    placeholder="endDate"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].institute"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].institute = $event.target.value"
+                    type="text" 
+                    placeholder="institute"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].degree"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].degree = $event.target.value"
+                     type="text" 
+                    placeholder="degree"                   
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].faculty"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].faculty = $event.target.value"
+                    type="text" 
+                    placeholder="faculty"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].major"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].major = $event.target.value"
+                    type="text" 
+                    placeholder="major"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].gpa"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].gpa = $event.target.value"
+                    type="text" 
+                    placeholder="gpa"                    
+                />
                 <br>
-                {{$store.state.resumeList[currentIndex*4 + 2]}}
+                <h2>경력사항</h2>
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].startDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].startDate = $event.target.value"
+                    type="text" 
+                    placeholder="startDate"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].endDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].endDate = $event.target.value"
+                    type="text" 
+                    placeholder="endDate"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].companyName"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].companyName = $event.target.value"
+                    type="text" 
+                    placeholder="companyName"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].position"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].position = $event.target.value"
+                    type="text" 
+                    placeholder="position"                    
+                />
                 <br>
-                {{$store.state.resumeList[currentIndex*4 + 3]}}
+                <h2>자격증 및 수상 경력</h2>
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 3].skillName"
+                    @input="$store.state.resumeList[currentIndex*4 + 3].skillName = $event.target.value"
+                    type="text" 
+                    placeholder="skillName"                   
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 3].level"
+                    @input="$store.state.resumeList[currentIndex*4 + 3].level = $event.target.value"
+                    type="text" 
+                    placeholder="level"                    
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 3].date"
+                    @input="$store.state.resumeList[currentIndex*4 + 3].date = $event.target.value"
+                    type="text" 
+                    placeholder="date"                    
+                />
+                <br>
+                <button @click="updateResume">이력서 수정</button>
             </div>
         </div>                   
     </div>    
 </div>
+<!-- 메인페이지 -->
 <div style="overflow:auto">
     <h1 v-if="$store.state.isMetaMaskConnected == true">MetaMask Connected!!</h1>
     <button v-if="$store.state.isMetaMaskConnected == false" @click="connectWallet">MetaMask Connection</button>
@@ -149,6 +279,7 @@
                 {{$store.state.resumeList[index]}}
                 <div v-if="index % 4 == 3">
                     <button @click="[isResumeOpen = true, currentIndex = ((index - 3)/4)]">이력서 수정</button>
+                    <button @click="deleteResume">이력서 삭제</button>
                 </div>
             </li>
         </div>        
@@ -262,6 +393,60 @@
                     }
                 }
             },
+            async updateResume() {
+                let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress)
+                let updatePersonalInfo = await ResumeContract.methods.updatePersonalInfo(
+                    //Change String type to Bytes32 type
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].picUrl),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].name),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].phone),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].email),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].dateOfBirth),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].socialUrl),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].location),this.currentIndex)
+                .send({
+                    from: this.$store.state.address //msg.sender
+                })
+                let updateEducation = await ResumeContract.methods.updateEducation(
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].startDate),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].endDate),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].institute),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].degree),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].faculty),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].major),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].gpa),this.currentIndex)
+                .send({
+                    from: this.$store.state.address //msg.sender
+                })
+                let updateExperience = await ResumeContract.methods.updateExperience(
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].startDate),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].endDate),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].companyName),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].position),this.currentIndex)
+                .send({
+                    from: this.$store.state.address //msg.sender
+                })
+                let updateSkill = await ResumeContract.methods.updateSkill(
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].skillName),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].level),
+                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].date),this.currentIndex)
+                .send({
+                    from: this.$store.state.address //msg.sender
+                })                    
+                if (updatePersonalInfo && updateEducation && updateExperience && updateSkill) {
+                    window.location.reload();
+                }
+            },
+            async deleteResume() {
+                let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress)
+                let isResumeDeleted = await ResumeContract.methods.remove(this.currentIndex)
+                .send({
+                    from: this.$store.state.address //msg.sender
+                })
+                if(isResumeDeleted){
+                    window.location.reload();
+                }
+            },
             //이력서 가져오기 함수
             async getValue() {
                 let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress)
@@ -335,9 +520,11 @@
             address.value = accounts[0];
             this.$store.commit('connectMetaMask');
             },
-            Test() {
-                this.$router.push('/');
-            },
+            resumeClosed(){
+                this.isResumeOpen = false;
+                this.currentIndex = 0;
+                window.location.reload();
+            }
         },
         watch: {
             // if value changed, reload page
@@ -381,8 +568,8 @@ li {
     position: fixed;
 }
 .modal {
-    width: 500px;
-    height: 600px;
+    width: 600px;
+    height: 800px;
     background: white;
     border-radius: 8px;
     padding: 20px;

@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.13;
 
 import "./Ownable.sol";
@@ -21,8 +22,8 @@ contract ResumeContract is Ownable {
 
 	// 학력 및 경력 정보
 	struct Education {
-		bytes32 startDate; // 입학 날짜
-		bytes32 endDate; // 졸업 날짜
+		bytes32 eduStartDate; // 입학 날짜
+		bytes32 eduEndDate; // 졸업 날짜
 		bytes32 institute; // 교육 기관명
 		bytes32 degree; // 학위
 		bytes32 faculty; // 학부
@@ -32,8 +33,8 @@ contract ResumeContract is Ownable {
 	}
 
 	struct Experience {
-		bytes32 startDate; // 입사 날짜
-		bytes32 endDate; // 퇴사 날짜
+		bytes32 expStartDate; // 입사 날짜
+		bytes32 expEndDate; // 퇴사 날짜
 		bytes32 companyName; // 회사명
 		bytes32 position; // 직위
 		bool isNotEmpty;
@@ -65,21 +66,18 @@ contract ResumeContract is Ownable {
 		mResumeModels[msg.sender].isNotEmpty = true;
 		return true;
 	}
-
 	function addEducation(bytes32 startDate, bytes32 endDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa) public returns (bool) {
 		Education memory edu = Education(startDate, endDate, institute, degree, faculty, major, gpa, true);
 		mResumeModels[msg.sender].educations.push(edu);
 		mResumeModels[msg.sender].isNotEmpty = true;
 		return true;
 	}
-
 	function addExperience(bytes32 startDate, bytes32 endDate, bytes32 companyName, bytes32 position) public returns (bool) {
 		Experience memory exp = Experience(startDate, endDate, companyName, position, true);
 		mResumeModels[msg.sender].experiences.push(exp);
 		mResumeModels[msg.sender].isNotEmpty = true;
 		return true;
 	}
-
 	function addSkill(bytes32 skill, bytes32 level, bytes32 date) public returns (bool) {
 		Skill memory skillStruct = Skill(skill, level, date, true);
 		mResumeModels[msg.sender].skills.push(skillStruct);
@@ -88,33 +86,42 @@ contract ResumeContract is Ownable {
 	}
 
 	// 구직자 이력서 수정
-	function updateEducation(bytes32 startDate, bytes32 endDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].educations.length > index) {
-			Education memory edu = Education(startDate, endDate, institute, degree, faculty, major, gpa, true);
-			mResumeModels[msg.sender].educations[index] = edu;
+	function updatePersonalInfo(bytes32 picUrl, bytes32 name, bytes32 phone, bytes32 email, bytes32 dateOfBirth, bytes32 socialUrl, bytes32 location, uint index) public returns (bool) {
+		if(mResumeModels[msg.sender].personalInfos.length > index) {
+			PersonalInfo memory info = PersonalInfo(picUrl, name, phone, email, dateOfBirth, socialUrl, location);
+			mResumeModels[msg.sender].personalInfos[index] = info;
+		
 			return true;
 		}
 		return false;
 	}
-	
-	function updateExperience(bytes32 startDate, bytes32 endDate, bytes32 companyName, bytes32 position, uint index) public returns(bool) {
-		if(mResumeModels[msg.sender].experiences.length > index) {
-			Experience memory exp = Experience(startDate, endDate, companyName, position, true);
-			mResumeModels[msg.sender].experiences[index] = exp;
+	function updateEducation(bytes32 eduStartDate, bytes32 eduEndDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint index) public returns (bool) {
+		if(mResumeModels[msg.sender].personalInfos.length > index) {			
+			Education memory edu = Education(eduStartDate, eduEndDate, institute, degree, faculty, major, gpa, true);
+			mResumeModels[msg.sender].educations[index] = edu;		
+			return true;
+		}
+		return false;
+	}
+	function updateExperience(bytes32 expStartDate, bytes32 expEndDate, bytes32 companyName, bytes32 position, uint index) public returns (bool) {
+		if(mResumeModels[msg.sender].personalInfos.length > index) {
+			Experience memory exp = Experience(expStartDate, expEndDate, companyName, position, true);
+			mResumeModels[msg.sender].experiences[index] = exp;			
+		
+			return true;
+		}
+		return false;
+	}
+	function updateSkill(bytes32 skill, bytes32 level, bytes32 date, uint index) public returns (bool) {
+		if(mResumeModels[msg.sender].personalInfos.length > index) {			
+			Skill memory skillStruct = Skill(skill, level, date, true);
+			mResumeModels[msg.sender].skills[index] = skillStruct;
+		
 			return true;
 		}
 		return false;
 	}
 
-	function updateSkill(bytes32 skill, bytes32 level, bytes32 date, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].skills.length > index) {
-			Skill memory skillStruct = Skill(skill, level, date, true);
-			mResumeModels[msg.sender].skills[index] = skillStruct;
-			return true;
-		}
-		return false;
-	}
-	
 	// 이력서 정보 확인
 	function getPersonalInfo() external view returns(PersonalInfo[] memory) {
 		return mResumeModels[msg.sender].personalInfos;
@@ -132,12 +139,30 @@ contract ResumeContract is Ownable {
 		return  mResumeModels[msg.sender].skills;
 	}
 
+	// 구직자 이력서 삭제
+	function remove(uint index) public returns (bool) {
+		if(mResumeModels[msg.sender].personalInfos.length > index) {
+			for(uint i = index; i < mResumeModels[msg.sender].personalInfos.length-1; i++) {
+				mResumeModels[msg.sender].personalInfos[i] = mResumeModels[msg.sender].personalInfos[i+1];
+				mResumeModels[msg.sender].educations[i] = mResumeModels[msg.sender].educations[i+1];
+				mResumeModels[msg.sender].experiences[i] = mResumeModels[msg.sender].experiences[i+1];
+				mResumeModels[msg.sender].skills[i] = mResumeModels[msg.sender].skills[i+1];
+			}
+			mResumeModels[msg.sender].personalInfos.pop();
+			mResumeModels[msg.sender].educations.pop();
+			mResumeModels[msg.sender].experiences.pop();
+			mResumeModels[msg.sender].skills.pop();
+	
+			return true;
+		}
+		return false;
+	}
 
 	event personalInfoEvent(bytes32 picUrl, bytes32 name, bytes32 phone, bytes32 email, bytes32 dateOfBirth, bytes32 socialUrl, bytes32 location);
 
-	event educationEvent(bytes32 startDate, bytes32 endDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint count, uint index);
+	event educationEvent(bytes32 eduStartDate, bytes32 eduEndDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint count, uint index);
 		 
-	event experienceEvent(bytes32 startDate, bytes32 endDate, bytes32 companyName, bytes32 position, uint count, uint index);
+	event experienceEvent(bytes32 expStartDate, bytes32 expEndDate, bytes32 companyName, bytes32 position, uint count, uint index);
 
 	event skillEvent(bytes32 skillName, bytes32 level, bytes32 date, uint count, uint index);
 
@@ -167,18 +192,6 @@ contract ResumeContract is Ownable {
 		}
 	}
 
-	function triggerGetExperienceByEvent(address accountId) public {
-		if(mResumeModels[accountId].isNotEmpty) {
-			Experience[] memory expList;
-			expList = mResumeModels[accountId].experiences;
-
-			for(uint i=0; i < expList.length; i++) {
-				Experience memory exp = expList[i];
-				emit experienceEvent(exp.startDate, exp.endDate, exp.companyName, exp.position, expList.length, i);
-			}
-		}
-	}
-
 	function triggerGetEducationByEvent(address accountId) public {
 		if(mResumeModels[accountId].isNotEmpty) {
 			Education[] memory eduList;
@@ -186,7 +199,19 @@ contract ResumeContract is Ownable {
 
 			for(uint i=0; i < eduList.length; i++) {
 				Education memory edu = eduList[i];
-				emit educationEvent(edu.startDate, edu.endDate, edu.institute, edu.degree, edu.faculty, edu.major, edu.gpa, eduList.length, i);
+				emit educationEvent(edu.eduStartDate, edu.eduEndDate, edu.institute, edu.degree, edu.faculty, edu.major, edu.gpa, eduList.length, i);
+			}
+		}
+	}
+	
+	function triggerGetExperienceByEvent(address accountId) public {
+		if(mResumeModels[accountId].isNotEmpty) {
+			Experience[] memory expList;
+			expList = mResumeModels[accountId].experiences;
+
+			for(uint i=0; i < expList.length; i++) {
+				Experience memory exp = expList[i];
+				emit experienceEvent(exp.expStartDate, exp.expEndDate, exp.companyName, exp.position, expList.length, i);
 			}
 		}
 	}

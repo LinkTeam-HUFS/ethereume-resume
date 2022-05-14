@@ -16,7 +16,7 @@
   "sourceMap": "61:205:1:-:0;;;190:73;;;;;;;;;;245:10;237:5;;:18;;;;;;;;;;;;;;;;;;61:205;;;;;;",
   "deployedSourceMap": "61:205:1:-:0;;;;;",
   "source": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.13;\r\n\r\ncontract Ownable{\r\n    address owner;\r\n\r\n    modifier onlyowner() {\r\n      require(msg.sender == owner);\r\n      _;\r\n    }\r\n\r\n    constructor() public { // Constructor\r\n        owner = msg.sender;\r\n    }\r\n}",
-  "sourcePath": "C:\\Users\\davej\\Desktop\\workspace\\Capstone\\contracts\\Ownable.sol",
+  "sourcePath": "C:\\Users\\davej\\Desktop\\workspace\\TestCapstone\\contracts\\Ownable.sol",
   "ast": {
     "absolutePath": "project:/contracts/Ownable.sol",
     "exportedSymbols": {
@@ -313,7 +313,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-05-03T12:33:51.940Z",
+  "updatedAt": "2022-05-13T08:57:36.146Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

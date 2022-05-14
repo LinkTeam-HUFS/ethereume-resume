@@ -47,3 +47,104 @@ Summary
 =======
 > Total deployments:   2
 > Final cost:          0.2338537 ETH
+=====================================================================================
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > block number:        12261197
+   > block timestamp:     1652432286
+   > account:             0x5C06250D49e39FD01d2d40Ff2C04b0C557150323
+   > balance:             6.485405270143846213
+   > gas used:            250154 (0x3d12a)
+   > gas price:           100 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0250154 ETH
+
+   -------------------------------------
+   > Total cost:           0.0250154 ETH
+
+
+2_ResumeContract_migration.js
+=============================
+
+   Deploying 'ResumeContract'
+   --------------------------
+   > block number:        12261199
+   > block timestamp:     1652432290
+   > account:             0x5C06250D49e39FD01d2d40Ff2C04b0C557150323
+   > balance:             6.212961170143846213
+   > gas used:            2678528 (0x28df00)
+   > gas price:           100 gwei
+   > value sent:          0 ETH
+   > total cost:          0.2678528 ETH
+
+   -------------------------------------
+   > Total cost:           0.2678528 ETH
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.2928682 ETH
+
+
+
+
+Starting migrations...
+======================
+> Network name:    'ropsten'
+> Network id:      3
+> Block gas limit: 8000000 (0x7a1200)
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0xeda22e65eb87a83a5b3f3f6eaecd129a9ff4af4764357ba96bbf91f3dc77ae9c
+   > Blocks: 1            Seconds: 17
+   > contract address:    0xAc9CFf90989a96d9504c051C5a4c44D047C60F74
+   > block number:        12261201
+   > block timestamp:     1652432214
+   > account:             0x5C06250D49e39FD01d2d40Ff2C04b0C557150323
+   > balance:             6.485405270143846213
+   > gas used:            250154 (0x3d12a)
+   > gas price:           100 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0250154 ETH
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:           0.0250154 ETH
+
+
+2_ResumeContract_migration.js
+=============================
+
+   Deploying 'ResumeContract'
+   --------------------------
+   > transaction hash:    0x4a8e76b57816ba5ac2c1b74574a63ed8984b278151dec38a2eab10f4c4a46139
+   > Blocks: 1            Seconds: 73
+   > contract address:    0x964c9eE3e058f44843b2994d5cF33944ab339039
+   > block number:        12261203
+   > block timestamp:     1652432382
+   > account:             0x5C06250D49e39FD01d2d40Ff2C04b0C557150323
+   > balance:             6.212961170143846213
+   > gas used:            2678528 (0x28df00)
+   > gas price:           100 gwei
+   > value sent:          0 ETH
+   > total cost:          0.2678528 ETH
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:           0.2678528 ETH
+
+Summary
+=======
+> Total deployments:   2
+> Final cost:          0.2928682 ETH
