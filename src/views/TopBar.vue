@@ -14,10 +14,10 @@
               <a href="/">Main</a>
             </li>
             <li>
-              <a href="/">Main</a>
+              <a href="/">Profile</a>
             </li>
             <li>
-              <a href="/">Main</a>
+              <a href="/">Example</a>
             </li>
             
           </ul>
