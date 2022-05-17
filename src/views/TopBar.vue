@@ -5,7 +5,7 @@
         <div class="row">
           <a aria-current="page" class="app--logo" href="/">
             <div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:142px;height:45px"> 
-              <img aria-hidden="true" :src="require('../img/logo.png')" alt="logo" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0; transition-delay: 500ms;"/>
+              <img aria-hidden="true" :src="require('../img/title.png')" alt="연결고리" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center center; transition-delay: 500ms;"/>
             </div>
           </a>
 
@@ -71,6 +71,7 @@
 .app--navigation .app--logo {
     flex: 1 1 auto;
     line-height: 1;
+    margin-right: 8cm;
 }
 
 a, a:hover {
@@ -84,7 +85,7 @@ a {
 .app--navigation ul.app--navbar {
     flex: 1 1 auto;
     height: 45px;
-    margin: 0;
+    margin: 0.25cm;
     padding-left: 0;
     text-align: right;
     
