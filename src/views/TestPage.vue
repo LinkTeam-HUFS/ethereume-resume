@@ -329,22 +329,27 @@
         <div>
             <li v-for="(resume,index) in $store.state.resumeList" :key="resume.key">
                 <div v-if="index % 4 ==0 && $store.state.isMetaMaskConnected == true">
-                --------------------------------------------------------------------------------------------------------------------
-                    <div>-{{(index / 4) + 1}}-</div>
                     <div id="box">
                       <img class="img" src="" alt="">
                       <h1 class="heading">{{ }}</h1>
                       <div class="data">
                         <span class="date">{{ }}</span>
-                        <span class="user-id">{{ }}</span>
+                        <span class="user-id">{{$store.state.resumeList[index].name }}</span>
+                        <span>연락처:{{$store.state.resumeList[index].phone}}</span>
+                        <span>이메일:{{$store.state.resumeList[index].email}}</span>
+                        <span>LinkedIn:{{$store.state.resumeList[index].socialUrl}}</span>
+                        <span>지역:{{$store.state.resumeList[index].location}}</span>
+                        <span>{{$store.state.resumeList[index+1].institute}}졸업({{$store.state.resumeList[index+1].startDate}}~{{$store.state.resumeList[index+1].endDate}})</span>
+                        <span>{{$store.state.resumeList[index+1].faculty}}{{$store.state.resumeList[index+1].major}}{{$store.state.resumeList[index+1].degree}}</span>
+                        <span>최종학점:{{$store.state.resumeList[index+1].gpa}}</span>
+                        <span v-if="$store.state.resumeList[index+2].companyName != undefined">{{$store.state.resumeList[index+2].companyName}}근무({{$store.state.resumeList[index+2].startDate}}~{{$store.state.resumeList[index+2].endDate}}/{{$store.state.resumeList[index+2].position}})</span>
+                        <span v-if="$store.state.resumeList[index+3].skillName != undefined">{{$store.state.resumeList[index+3].skillName}}취득({{$store.state.resumeList[index+3].date}})</span>
                       </div>
                       <p class="texts">
                         {{ }}
                       </p>
                     </div>
-
                 </div>
-                {{$store.state.resumeList[index]}}
                 <div v-if="index % 4 == 3">
                     <button @click="[isResumeOpen = true, currentIndex = ((index - 3)/4)]">이력서 수정</button>
                     <button @click="deleteResume">이력서 삭제</button>
