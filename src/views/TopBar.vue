@@ -5,7 +5,7 @@
         <div class="row">
           <a aria-current="page" class="app--logo" href="/">
             <div class=" gatsby-image-wrapper" style="position:relative;overflow:hidden;display:inline-block;width:142px;height:45px"> 
-              <img aria-hidden="true" src="src/img/logo.png" alt="logo" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0; transition-delay: 500ms;">
+              <img aria-hidden="true" :src="require('../img/logo.png')" alt="logo" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0; transition-delay: 500ms;"/>
             </div>
           </a>
 
