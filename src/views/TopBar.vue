@@ -34,10 +34,6 @@
     display: block;
   }
 
-  .app--header{
-    
-  }
-
   .ui.container1 {
     margin-left: auto!important;
     margin-right: auto!important;
