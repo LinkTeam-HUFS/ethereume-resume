@@ -1,4 +1,9 @@
 <template>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
 <!-- 이력서 수정페이지 -->
 <div class="background" v-if="isResumeOpen == true"> 
     <div class="modal">
@@ -145,136 +150,183 @@
     </div>    
 </div>
 <!-- 메인페이지 -->
-<div style="overflow:auto">
+
+<div style="overflow:auto" class="main-all">
+  <section class="skewdBox">
+    <div class="container">
+    
+    <TopBar/>
+    <div class="titletext"> 당신의 이력서를 작성해주세요 </div>
+    <div class="sidetext"> MetaMask와 연결을 꼭 확인해주세요 </div>
     <h1 v-if="$store.state.isMetaMaskConnected == true">MetaMask Connected!!</h1>
-    <button v-if="$store.state.isMetaMaskConnected == false" @click="connectWallet">MetaMask Connection</button>
+    <button v-if="$store.state.isMetaMaskConnected == false" @click="connectWallet" class="ui button mainbutton">MetaMask Connection</button>
     <div>
         current address:{{$store.state.address}}
     </div>
-    <div>
-    ===================================================================================================================================
-        <h1>이력서 작성</h1>
-        <h2>인적사항</h2>
-        <input
-            v-model="picUrl"
-            type="text" 
-            placeholder="picUrl"
-        />
-        <input
-            v-model="name"
-            type="text" 
-            placeholder="이름"
-        />
-        <input
-            v-model="phone"
-            type="text" 
-            placeholder="전화번호"
-        />
-        <input
-            v-model="email"
-            type="text" 
-            placeholder="이메일"
-        />
-        <input
-            v-model="dateOfBirth"
-            type="text" 
-            placeholder="생년월일"
-        />
-        <input
-            v-model="socialUrl"
-            type="text" 
-            placeholder="소셜URL"
-        />
-        <input
-            v-model="location"
-            type="text" 
-            placeholder="소재지"
-        />
-        <h2>학력사항</h2>
-        <input
-            v-model="startDate_Edu"
-            type="text" 
-            placeholder="입학연도"
-        />
-        <input
-            v-model="endDate_Edu"
-            type="text" 
-            placeholder="졸업연도"
-        />
-        <input
-            v-model="institute"
-            type="text" 
-            placeholder="학교"
-        />
-        <input
-            v-model="degree"
-            type="text" 
-            placeholder="학위"
-        />
-        <input
-            v-model="faculty"
-            type="text" 
-            placeholder="학부"
-        />
-        <input
-            v-model="major"
-            type="text" 
-            placeholder="전공"
-        />
-        <input
-            v-model="gpa"
-            type="text" 
-            placeholder="학점"
-        />
-        <h2>경력사항</h2>
-        <input
-            v-model="startDate_Ex"
-            type="text" 
-            placeholder="입사연도"
-        />
-        <input
-            v-model="endDate_Ex"
-            type="text" 
-            placeholder="퇴사연도"
-        />
-        <input
-            v-model="companyName"
-            type="text" 
-            placeholder="회사명"
-        />
-        <input
-            v-model="position"
-            type="text" 
-            placeholder="직위"
-        />
-        <h2>자격증 및 수상 경력</h2>
-        <input
-            v-model="skillName"
-            type="text" 
-            placeholder="자격증명"
-        />
-        <input
-            v-model="level"
-            type="text" 
-            placeholder="수준"
-        />
-        <input
-            v-model="date"
-            type="text" 
-            placeholder="취득일자"
-        />
-        <div>
-            <button class="button is-primary" @click="setValue">이력서 작성</button>
+    
+        <div class="textbox-item">
+            <h2>인적사항</h2>
+            <input
+                v-model="picUrl"
+                type="text" 
+                placeholder="picUrl"
+                class="ui textbox"
+            />
+            <input
+                v-model="name"
+                type="text" 
+                placeholder="이름"
+                class="ui textbox"
+            />
+            <input
+                v-model="phone"
+                type="text" 
+                placeholder="전화번호"
+                class="ui textbox"
+            />
+            <input
+                v-model="email"
+                type="text" 
+                placeholder="이메일"
+                class="ui textbox"
+            />
+            <input
+                v-model="dateOfBirth"
+                type="text" 
+                placeholder="생년월일"
+                class="ui textbox"
+            />
+            <input
+                v-model="socialUrl"
+                type="text" 
+                placeholder="소셜URL"
+                class="ui textbox"
+            />
+            <input
+                v-model="location"
+                type="text" 
+                placeholder="소재지"
+                class="ui textbox"
+            />
+            <h2>학력사항</h2>
+            <input
+                v-model="startDate_Edu"
+                type="text" 
+                placeholder="입학연도"
+                class="ui textbox"
+            />
+            <input
+                v-model="endDate_Edu"
+                type="text" 
+                placeholder="졸업연도"
+                class="ui textbox"
+            />
+            <input
+                v-model="institute"
+                type="text" 
+                placeholder="학교"
+                class="ui textbox"
+            />
+            <input
+                v-model="degree"
+                type="text" 
+                placeholder="학위"
+                class="ui textbox"
+            />
+            <input
+                v-model="faculty"
+                type="text" 
+                placeholder="학부"
+                class="ui textbox"
+            />
+            <input
+                v-model="major"
+                type="text" 
+                placeholder="전공"
+                class="ui textbox"
+            />
+            <input
+                v-model="gpa"
+                type="text" 
+                placeholder="학점"
+                class="ui textbox"
+            />
+            <h2>경력사항</h2>
+            <input
+                v-model="startDate_Ex"
+                type="text" 
+                placeholder="입사연도"
+                class="ui textbox"
+            />
+            <input
+                v-model="endDate_Ex"
+                type="text" 
+                placeholder="퇴사연도"
+                class="ui textbox"
+            />
+            <input
+                v-model="companyName"
+                type="text" 
+                placeholder="회사명"
+                class="ui textbox"
+            />
+            <input
+                v-model="position"
+                type="text" 
+                placeholder="직위"
+                class="ui textbox"
+            />
+            <h2>자격증 및 수상 경력</h2>
+            <input
+                v-model="skillName"
+                type="text" 
+                placeholder="자격증명"
+                class="ui textbox"
+            />
+            <input
+                v-model="level"
+                type="text" 
+                placeholder="수준"
+                class="ui textbox"
+            />
+            <input
+                v-model="date"
+                type="text" 
+                placeholder="취득일자"
+                class="ui textbox"
+            />
         </div>
+        <div>
+          <br>
+          <br>
+          
+        
+            <button class="button is-primary" @click="setValue" id="mainbutton2">이력서 작성</button>
+        </div>
+      </div>
+  </section>
+      <section class="section2">
+        <div class="container">
         <h1>{{loading}}</h1>
         <!-- 이력서 목록 표시 -->
-        ===================================================================================================================================
         <h1>이력서 목록</h1>
         <div>
             <li v-for="(resume,index) in $store.state.resumeList" :key="resume.key">
                 <div v-if="index % 4 ==0 && $store.state.isMetaMaskConnected == true">
                 --------------------------------------------------------------------------------------------------------------------
                     <div>-{{(index / 4) + 1}}-</div>
+                    <div id="box">
+                      <img class="img" src="" alt="">
+                      <h1 class="heading">{{ }}</h1>
+                      <div class="data">
+                        <span class="date">{{ }}</span>
+                        <span class="user-id">{{ }}</span>
+                      </div>
+                      <p class="texts">
+                        {{ }}
+                      </p>
+                    </div>
+
                 </div>
                 {{$store.state.resumeList[index]}}
                 <div v-if="index % 4 == 3">
@@ -282,16 +334,25 @@
                     <button @click="deleteResume">이력서 삭제</button>
                 </div>
             </li>
-        </div>        
+        </div>  
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+      </section>      
     </div>
-</div>
 </template>
 
 <script lang="js">
     import { onMounted, ref } from '@vue/runtime-core'
     import { useStore } from 'vuex'
     import Web3 from "web3";
-    import ResumeContract from '../../build/contracts/ResumeContract.json'
+    import ResumeContract from '../../build/contracts/ResumeContract.json';
+    import TopBar from './TopBar.vue';
 
     const contractAddress = process.env.VUE_APP_CONTRACT_ADDRESS
     const ethers = require('ethers')
@@ -337,6 +398,7 @@
                 currentIndex: 0
             };
         },
+        components:{TopBar},
         methods: {
             handler() {
                 alert('quit browser');
@@ -555,9 +617,12 @@
 </script>
 
 <style>
-body{
-    margin : 0;
+body {  
+  background: linear-gradient(90deg,#66b6ea,#8743ff); /*** 하단 background 컬러 ***/  
+  color: white;
+  margin: 0 0 0 0;
 }
+
 li {
     list-style:none;
 }
@@ -578,4 +643,162 @@ li {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.ui.button.mainbutton{
+    background: #3d7aed;
+    background: linear-gradient(90deg,#66b6ea,#8743ff);
+    border-radius: 1.3em;
+    box-shadow: 0 10px 30px 2px rgb(159 191 255 / 40%);
+    color: #fff;
+    font-family: M PLUS Rounded\ 1c,sans-serif;
+    font-size: 16px;
+    margin: 1em 0;
+    min-width: 200px;
+    mix-blend-mode: multiply;
+}
+
+
+.ui.button:hover {
+  transition: transform 1s;
+  filter: brightness(80%);
+}
+
+#mainbutton2{
+    background: #3d7aed;
+    background: linear-gradient(90deg,#66b6ea,#8743ff);
+    border-radius: 1.3em;
+    box-shadow: 0 10px 30px 2px rgb(159 191 255 / 40%);
+    color: #fff;
+    font-family: M PLUS Rounded\ 1c,sans-serif;
+    font-size: 16px;
+    margin: 1em 0;
+    min-width: 200px;
+    mix-blend-mode: multiply;
+}
+
+#mainbutton2:hover {
+  transition: transform 1s;
+  filter: brightness(80%);
+}
+
+.ui.textbox{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+}
+.ui.textbox:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
+
+}
+
+.main-all{
+  font-family: 'Jua', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.textbox-item{
+  display: inline;
+}
+
+.skewdBox {  
+background-image: url('../img/img.jpeg');/*** 상단 background 컬러 ***/  
+color: black;
+padding: 200px 0 ;  
+-webkit-transform: skew(0deg, -10deg);  
+-moz-transform: skew(0deg, -10deg);  
+-ms-transform: skew(0deg, -10deg);  
+-o-transform: skew(0deg, -10deg);  
+transform: skew(0deg, -10deg);  
+margin-top: -180px; /*** 상단 background 여백높이 ***/
+}
+
+.skewdBox .container {  
+-webkit-transform: skew(0deg, 10deg);  
+-moz-transform: skew(0deg, 10deg);  
+-ms-transform: skew(0deg, 10deg);  
+-o-transform: skew(0deg, 10deg);  
+transform: skew(0deg, 10deg);  
+text-align: center;
+}
+.section2 {  
+padding-top: 120px;  
+margin-top: -50px; /*** 하단 background 여백높이 ***/}
+.section2 .credits {  
+text-align: center;  
+color: #666;
+}
+.section2 .credits .link {  
+color: #00B285;  
+text-decoration: none;
+}
+.section2 .container {  
+width: 80%;  
+margin: 0 auto;  
+text-align: center;
+}
+
+.titletext{
+  color: #031b4e;
+  font-size: 2rem;
+}
+
+.sidetext{
+    color: rgba(149, 149, 150, 0.7);
+}
+
+#box {
+  width: 300px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 100px auto;
+  transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+}
+
+#box:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  transform: translateY(-10px);
+}
+#box * {
+  padding: 10px;
+}
+
+#box .img {
+  display: block;
+  width: 100%;
+  padding: 0;
+}
+#box .heading {
+  font-size: 28px;
+}
+
+#box .data {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: #666;
+}
+
+#box .data span {
+  padding: 0;
+}
+
+#box .data .date {
+  margin-bottom: 2px;
+}
+
+#box .data .user-id {
+  font-size: 16px;
+  color: #000;
+  font-weight: 600;
+}
+
+#box .texts {
+  font-size: 14px;
+  line-height: 18px;
+}
+
 </style>
