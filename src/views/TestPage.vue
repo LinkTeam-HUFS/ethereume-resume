@@ -165,136 +165,152 @@
     </div>
     
         <div class="textbox-item">
-            <h2>인적사항</h2>
+            <h2 class="left-text">인적사항</h2>
+            <div class="balloon_03">
+            <div class="text1">
             <input
                 v-model="picUrl"
                 type="text" 
                 placeholder="picUrl"
-                class="ui textbox"
+                class="ui textbox1"
             />
             <input
                 v-model="name"
                 type="text" 
                 placeholder="이름"
-                class="ui textbox"
+                class="ui textbox1"
             />
             <input
                 v-model="phone"
                 type="text" 
                 placeholder="전화번호"
-                class="ui textbox"
+                class="ui textbox1"
             />
             <input
                 v-model="email"
                 type="text" 
                 placeholder="이메일"
-                class="ui textbox"
+                class="ui textbox1"
             />
             <input
                 v-model="dateOfBirth"
                 type="text" 
                 placeholder="생년월일"
-                class="ui textbox"
+                class="ui textbox1"
             />
             <input
                 v-model="socialUrl"
                 type="text" 
                 placeholder="소셜URL"
-                class="ui textbox"
+                class="ui textbox1"
             />
             <input
                 v-model="location"
                 type="text" 
                 placeholder="소재지"
-                class="ui textbox"
+                class="ui textbox1"
             />
-            <h2>학력사항</h2>
+            </div>
+            </div>
+            <h2 class="right-text">학력사항</h2>
+            <div class="balloon_04">
+            <div class="text2">
             <input
                 v-model="startDate_Edu"
                 type="text" 
                 placeholder="입학연도"
-                class="ui textbox"
+                class="ui textbox2"
             />
             <input
                 v-model="endDate_Edu"
                 type="text" 
                 placeholder="졸업연도"
-                class="ui textbox"
+                class="ui textbox2"
             />
             <input
                 v-model="institute"
                 type="text" 
                 placeholder="학교"
-                class="ui textbox"
+                class="ui textbox2"
             />
             <input
                 v-model="degree"
                 type="text" 
                 placeholder="학위"
-                class="ui textbox"
+                class="ui textbox2"
             />
             <input
                 v-model="faculty"
                 type="text" 
                 placeholder="학부"
-                class="ui textbox"
+                class="ui textbox2"
             />
             <input
                 v-model="major"
                 type="text" 
                 placeholder="전공"
-                class="ui textbox"
+                class="ui textbox2"
             />
             <input
                 v-model="gpa"
                 type="text" 
                 placeholder="학점"
-                class="ui textbox"
+                class="ui textbox2"
             />
-            <h2>경력사항</h2>
+            </div>
+            </div>
+            <h2 class="left-text">경력사항</h2>
+            <div class="balloon_03">
+            <div class="text3">
             <input
                 v-model="startDate_Ex"
                 type="text" 
                 placeholder="입사연도"
-                class="ui textbox"
+                class="ui textbox3"
             />
             <input
                 v-model="endDate_Ex"
                 type="text" 
                 placeholder="퇴사연도"
-                class="ui textbox"
+                class="ui textbox3"
             />
             <input
                 v-model="companyName"
                 type="text" 
                 placeholder="회사명"
-                class="ui textbox"
+                class="ui textbox3"
             />
             <input
                 v-model="position"
                 type="text" 
                 placeholder="직위"
-                class="ui textbox"
+                class="ui textbox3"
             />
-            <h2>자격증 및 수상 경력</h2>
+            </div>
+            </div>
+            <h2 class="right-text">자격증 및 수상 경력</h2>
+            <div class="balloon_04">
+            <div class="text4">
             <input
                 v-model="skillName"
                 type="text" 
                 placeholder="자격증명"
-                class="ui textbox"
+                class="ui textbox4"
             />
             <input
                 v-model="level"
                 type="text" 
                 placeholder="수준"
-                class="ui textbox"
+                class="ui textbox4"
             />
             <input
                 v-model="date"
                 type="text" 
                 placeholder="취득일자"
-                class="ui textbox"
+                class="ui textbox4"
             />
+            </div>
+            </div>
         </div>
         <div>
           <br>
@@ -681,17 +697,60 @@ li {
   filter: brightness(80%);
 }
 
-.ui.textbox{
+.ui.textbox1{
     background: transparent;
     border: none;
     border-bottom: 2px solid #66b6ea;
     margin-right: 2cm;
     margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 0.35cm;
 }
-.ui.textbox:hover {
+.ui.textbox1:hover {
   transition: transform 1s;
   filter: brightness(90%);
+}
 
+.ui.textbox2{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 0.35cm;
+}
+.ui.textbox2:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
+}
+
+.ui.textbox3{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 0.9cm;
+}
+.ui.textbox3:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
+}
+
+.ui.textbox4{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 1.2cm;
+}
+.ui.textbox4:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
 }
 
 .main-all{
@@ -704,10 +763,20 @@ li {
   display: inline;
 }
 
+.left-text{
+  text-align: left;
+  margin-left: 8cm;
+}
+
+.right-text{
+  text-align: right;
+  margin-right: 8cm;
+}
+
 .skewdBox {  
-background-image: url('../img/img.jpeg');/*** 상단 background 컬러 ***/  
+background-image: url('../img/123.png');/*** 상단 background 컬러 ***/  
 color: black;
-padding: 200px 0 ;  
+padding: 200px 0 ;
 -webkit-transform: skew(0deg, -10deg);  
 -moz-transform: skew(0deg, -10deg);  
 -ms-transform: skew(0deg, -10deg);  
@@ -800,5 +869,66 @@ text-align: center;
   font-size: 14px;
   line-height: 18px;
 }
+
+.balloon_01 {
+ position:relative;
+ margin: 50px;
+ width:400px;
+ height:100px;
+  background:pink;
+  border-radius: 10px;
+}
+.balloon_01:after {
+ border-top:0px solid transparent;
+ border-left: 10px solid transparent;
+ border-right: 10px solid transparent;
+ border-bottom: 10px solid pink;
+ content:"";
+ position:absolute;
+ top:-10px;
+ left:200px;
+}
+ 
+.balloon_03 {
+ position:relative;
+ margin: 50px;
+ margin-left: 10cm;
+ width: 320px;
+ height:250px;
+  background: rgba(197, 221, 246, 0.4);
+  border-radius: 10px;
+
+}
+.balloon_03:after {
+ border-top:15px solid rgba(197, 221, 246, 0.4);;
+ border-left: 15px solid transparent;
+ border-right: 0px solid transparent;
+ border-bottom: 0px solid transparent;
+ content:"";
+ position:absolute;
+ top:10px;
+ left:-15px;
+}
+
+.balloon_04 {
+ position:relative;
+ margin: 50px;
+ margin-left: 20cm;
+ width: 320px;
+ height:250px;
+  background: rgba(197, 221, 246, 0.4);
+  border-radius: 10px;
+}
+.balloon_04:after {
+ border-top:15px solid rgba(197, 221, 246, 0.905);;
+ border-right: 15px solid transparent;
+ border-left: 0px solid transparent;
+ border-bottom: 0px solid transparent;
+ content:"";
+ position:absolute;
+ top:10px;
+ right:-15px;
+}
+ 
 
 </style>

@@ -35,7 +35,7 @@
   }
 
   .app--header{
-    background-color: #ecf2fd;
+    
   }
 
   .ui.container1 {

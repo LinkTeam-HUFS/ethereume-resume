@@ -22,10 +22,8 @@ button {
 
   font-size: 1rem;
   font-weight: 600;
-  text-align: center;
   text-decoration: none;
 
-  display: inline-block;
   width: auto;
 
   border: none;
