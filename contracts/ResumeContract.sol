@@ -58,6 +58,12 @@ contract ResumeContract is Ownable {
 	}
 
 	mapping (address => ResumeModel) mResumeModels;
+	mapping(address => uint) registerd;
+	address[] public registeredArray;
+	uint public resumeCount = 0;
+	function getUsers() public view returns (address[] memory){
+		return registeredArray;
+	}
 
 	// 구직자 이력서 생성
 	function addPersonalInfo(bytes32 picUrl, bytes32 name, bytes32 phone, bytes32 email, bytes32 dateOfBirth, bytes32 socialUrl, bytes32 location) public returns (bool) {
@@ -82,6 +88,11 @@ contract ResumeContract is Ownable {
 		Skill memory skillStruct = Skill(skill, level, date, true);
 		mResumeModels[msg.sender].skills.push(skillStruct);
 		mResumeModels[msg.sender].isNotEmpty = true;
+    	if(registerd[msg.sender] != 1) {
+        	registerd[msg.sender] = 1;
+        	registeredArray.push(msg.sender); // push to the array
+		}
+		resumeCount++;
 		return true;
 	}
 
@@ -138,6 +149,35 @@ contract ResumeContract is Ownable {
 	function getSkill() public view returns (Skill[] memory) {
 		return  mResumeModels[msg.sender].skills;
 	}
+	// 이력서 전체 불러오기
+	function getAllPersonalInfo()  external view returns (PersonalInfo[][] memory) {
+		PersonalInfo[][] memory allPersonalInfos;
+		for(uint i = 0; i < registeredArray.length; i++) {
+			allPersonalInfos[i] = mResumeModels[registeredArray[i]].personalInfos;
+		}
+		return allPersonalInfos;
+	}
+	function getAllEducation()  external view returns (Education[][] memory) {
+		Education[][] memory allEducations;
+		for(uint i = 0; i < registeredArray.length; i++) {
+			allEducations[i] = mResumeModels[registeredArray[i]].educations;
+		}
+		return allEducations;
+	}
+	function getAllExperience()  external view returns (Experience[][] memory) {
+		Experience[][] memory allExperiences;
+		for(uint i = 0; i < registeredArray.length; i++) {
+			allExperiences[i] = mResumeModels[registeredArray[i]].experiences;
+		}
+		return allExperiences;
+	}
+	function getAllSkill()  external view returns (Skill[][] memory) {
+		Skill[][] memory allSkills;
+		for(uint i = 0; i < registeredArray.length; i++) {
+			allSkills[i] = mResumeModels[registeredArray[i]].skills;
+		}
+		return allSkills;
+	}
 
 	// 구직자 이력서 삭제
 	function remove(uint index) public returns (bool) {
@@ -153,8 +193,9 @@ contract ResumeContract is Ownable {
 			mResumeModels[msg.sender].experiences.pop();
 			mResumeModels[msg.sender].skills.pop();
 	
-			return true;
+			return true;	
 		}
+		resumeCount--;
 		return false;
 	}
 

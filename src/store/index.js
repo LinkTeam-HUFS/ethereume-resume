@@ -7,6 +7,7 @@ export default createStore({
     isMetaMaskConnected: false,
     user: null,
     resumeList: [],
+    allResumeList: [],
     personalInfo: {
       picUrl: "",
       name: "",
@@ -56,8 +57,12 @@ export default createStore({
     setResume(state, payload){
       state.resumeList.push(payload);
     },
+    setAllResume(state, payload){
+      state.allResumeList.push(payload);
+    },
     initialize(state){
       state.resumeList = [];
+      state.allResumeList = [];
     }
   },
   plugins: [
