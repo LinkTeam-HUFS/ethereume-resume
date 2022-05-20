@@ -949,6 +949,7 @@ text-align: center;
   overflow: hidden;
   margin: 100px auto;
   transition: all 0.3s cubic-bezier(0.42, 0.0, 0.58, 1.0);
+  background: linear-gradient(90deg,#cfe9fb,#e1d2fc);
 }
 
 #box:hover {

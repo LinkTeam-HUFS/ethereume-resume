@@ -68,9 +68,8 @@
   <div style="overflow: auto" class="main-all">
     <section class="skewdBox">
       <div class="container">
-        <TopBar />
       <h1>이력서 전체목록(총{{$store.state.resumeCount}}장)</h1>
-        <div>
+        <div class="displaysetting">
             <li v-for="(resume,index) in $store.state.allResumeList" :key="resume.key">
                 <div v-if="index % 4 ==0">
                     <div id="box">
@@ -531,8 +530,9 @@ li {
   width: 300px;
   border-radius: 8px;
   overflow: hidden;
-  margin: 100px auto;
+  margin: 100px;
   transition: all 0.3s cubic-bezier(0.42, 0, 0.58, 1);
+  flex: auto;
 }
 #box:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -626,5 +626,11 @@ li {
   position: absolute;
   top: 10px;
   right: -15px;
+}
+.displaysetting{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 70px;
 }
 </style>
