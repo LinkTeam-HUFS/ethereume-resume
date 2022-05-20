@@ -11,7 +11,7 @@
 
           <ul class="app--navbar reset-list un-select">
             <li>
-              <a href="/">Main</a>
+              <a href="/">DID</a>
             </li>
             <li>
               <a href="/">Profile</a>
