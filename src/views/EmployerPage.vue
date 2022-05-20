@@ -15,11 +15,9 @@
   <div>
     <ul>
       <li>
-        <a href="">구인회사 메인 페이지</a>
+        <a href=""></a>
       </li>
-      <li>
-        <button>로그아웃</button>
-      </li>
+
     </ul>
 
     <div class="menu">
@@ -121,8 +119,6 @@
 </template>
 
 <script>
-//import { onMounted, ref } from '@vue/runtime-core'
-//import { useStore } from 'vuex'
 import Web3 from "web3";
 import ResumeContract from '../../build/contracts/ResumeContract.json';
 
