@@ -17,7 +17,7 @@
               <a href="/">Profile</a>
             </li>
             <li>
-              <a href="/">Example</a>
+              <router-link to='/EmployerPage'>구인회사 페이지</router-link>
             </li>
             
           </ul>

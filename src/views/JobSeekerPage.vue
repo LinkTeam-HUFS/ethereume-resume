@@ -326,6 +326,12 @@
         <h1>{{loading}}</h1>
         <!-- 이력서 목록 표시 -->
         <h1>나의 이력서</h1>
+        <div v-if="$store.state.resumeList[0] == 'you need to connect MetaMask'">
+            메타마스크 지갑 연결을 확인해주세요
+        </div>
+        <div v-if="$store.state.resumeList[0] == 'you did not write resume yet'">
+            아직 이력서를 작성하지 않았습니다
+        </div>
         <div>
             <li v-for="(resume,index) in $store.state.resumeList" :key="resume.key">
                 <div v-if="index % 4 ==0 && $store.state.isMetaMaskConnected == true">
@@ -365,7 +371,7 @@
         <br>
         
       </section>
-      <h1>이력서 전체목록(총{{$store.state.resumeCount}}장)</h1>
+      <!-- <h1>이력서 전체목록(총{{$store.state.resumeCount}}장)</h1>
         <div>
             <li v-for="(resume,index) in $store.state.allResumeList" :key="resume.key">
                 <div v-if="index % 4 ==0">
@@ -391,7 +397,7 @@
                     </div>
                 </div>
             </li>
-        </div>    
+        </div>     -->
     </div>
 </template>
 
@@ -624,62 +630,62 @@
                     this.$store.commit('setResume', payload);
                 }
             },
-            async getAllValue(){
-                let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress);
-                const addresslist = await ResumeContract.methods.getUsers().call(); 
-                const resumeCount = await ResumeContract.methods.resumeCount().call();
-                this.$store.state.resumeCount = resumeCount;
-                for(let i=0;i<addresslist.length;i++){
-                    let personalInfo = await ResumeContract.methods.getPersonalInfo().call({
-                        from: addresslist[i] //msg.sender
-                    })
-                    let education = await ResumeContract.methods.getEducation().call({
-                        from: addresslist[i] //msg.sender
-                    })
-                    let experience = await ResumeContract.methods.getExperience().call({
-                        from: addresslist[i] //msg.sender
-                    })
-                    let skill = await ResumeContract.methods.getSkill().call({
-                        from: addresslist[i] //msg.sender
-                    })
-                    for(let j=0; j<personalInfo.length ;j++){
-                        const payload = {
-                        //Change Bytes32 type to String type
-                            'picUrl': ethers.utils.parseBytes32String(personalInfo[j][0]),
-                            'name': ethers.utils.parseBytes32String(personalInfo[j][1]),
-                            'phone': ethers.utils.parseBytes32String(personalInfo[j][2]),  
-                            'email': ethers.utils.parseBytes32String(personalInfo[j][3]),
-                            'dateOfBirth': ethers.utils.parseBytes32String(personalInfo[j][4]),
-                            'socialUrl': ethers.utils.parseBytes32String(personalInfo[j][5]),
-                            'location': ethers.utils.parseBytes32String(personalInfo[j][6]),
-                        }
-                        this.$store.commit('setAllResume', payload);
-                        const payload2 = {
-                            'startDate': ethers.utils.parseBytes32String(education[j][0]),
-                            'endDate': ethers.utils.parseBytes32String(education[j][1]),
-                            'institute': ethers.utils.parseBytes32String(education[j][2]),  
-                            'degree': ethers.utils.parseBytes32String(education[j][3]),
-                            'faculty': ethers.utils.parseBytes32String(education[j][4]),
-                            'major': ethers.utils.parseBytes32String(education[j][5]),
-                            'gpa': ethers.utils.parseBytes32String(education[j][6]),
-                        }
-                        this.$store.commit('setAllResume', payload2);
-                        const payload3 = {
-                            'startDate': ethers.utils.parseBytes32String(experience[j][0]),
-                            'endDate': ethers.utils.parseBytes32String(experience[j][1]),
-                            'companyName': ethers.utils.parseBytes32String(experience[j][2]),  
-                            'position': ethers.utils.parseBytes32String(experience[j][3]),
-                        }
-                        this.$store.commit('setAllResume', payload3);
-                        const payload4 = {
-                            'skillName': ethers.utils.parseBytes32String(skill[j][0]),
-                            'level': ethers.utils.parseBytes32String(skill[j][1]),
-                            'date': ethers.utils.parseBytes32String(skill[j][2]),  
-                        }
-                        this.$store.commit('setAllResume', payload4);                                                
-                    }
-                }
-            },
+            // async getAllValue(){
+            //     let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress);
+            //     const addresslist = await ResumeContract.methods.getUsers().call(); 
+            //     const resumeCount = await ResumeContract.methods.resumeCount().call();
+            //     this.$store.state.resumeCount = resumeCount;
+            //     for(let i=0;i<addresslist.length;i++){
+            //         let personalInfo = await ResumeContract.methods.getPersonalInfo().call({
+            //             from: addresslist[i] //msg.sender
+            //         })
+            //         let education = await ResumeContract.methods.getEducation().call({
+            //             from: addresslist[i] //msg.sender
+            //         })
+            //         let experience = await ResumeContract.methods.getExperience().call({
+            //             from: addresslist[i] //msg.sender
+            //         })
+            //         let skill = await ResumeContract.methods.getSkill().call({
+            //             from: addresslist[i] //msg.sender
+            //         })
+            //         for(let j=0; j<personalInfo.length ;j++){
+            //             const payload = {
+            //             //Change Bytes32 type to String type
+            //                 'picUrl': ethers.utils.parseBytes32String(personalInfo[j][0]),
+            //                 'name': ethers.utils.parseBytes32String(personalInfo[j][1]),
+            //                 'phone': ethers.utils.parseBytes32String(personalInfo[j][2]),  
+            //                 'email': ethers.utils.parseBytes32String(personalInfo[j][3]),
+            //                 'dateOfBirth': ethers.utils.parseBytes32String(personalInfo[j][4]),
+            //                 'socialUrl': ethers.utils.parseBytes32String(personalInfo[j][5]),
+            //                 'location': ethers.utils.parseBytes32String(personalInfo[j][6]),
+            //             }
+            //             this.$store.commit('setAllResume', payload);
+            //             const payload2 = {
+            //                 'startDate': ethers.utils.parseBytes32String(education[j][0]),
+            //                 'endDate': ethers.utils.parseBytes32String(education[j][1]),
+            //                 'institute': ethers.utils.parseBytes32String(education[j][2]),  
+            //                 'degree': ethers.utils.parseBytes32String(education[j][3]),
+            //                 'faculty': ethers.utils.parseBytes32String(education[j][4]),
+            //                 'major': ethers.utils.parseBytes32String(education[j][5]),
+            //                 'gpa': ethers.utils.parseBytes32String(education[j][6]),
+            //             }
+            //             this.$store.commit('setAllResume', payload2);
+            //             const payload3 = {
+            //                 'startDate': ethers.utils.parseBytes32String(experience[j][0]),
+            //                 'endDate': ethers.utils.parseBytes32String(experience[j][1]),
+            //                 'companyName': ethers.utils.parseBytes32String(experience[j][2]),  
+            //                 'position': ethers.utils.parseBytes32String(experience[j][3]),
+            //             }
+            //             this.$store.commit('setAllResume', payload3);
+            //             const payload4 = {
+            //                 'skillName': ethers.utils.parseBytes32String(skill[j][0]),
+            //                 'level': ethers.utils.parseBytes32String(skill[j][1]),
+            //                 'date': ethers.utils.parseBytes32String(skill[j][2]),  
+            //             }
+            //             this.$store.commit('setAllResume', payload4);                                                
+            //         }
+            //     }
+            // },
             //메타마스크 지갑 연결
             async connectWallet() {
             const accounts = await (window).ethereum.request({ method: 'eth_requestAccounts'});
@@ -705,7 +711,7 @@
             
             this.$store.commit('initialize');
             this.getValue();
-            this.getAllValue();
+            //this.getAllValue();
             //메타마스크 지갑 변경 감지
             window.ethereum.on('accountsChanged', function (accounts) {
                 store.commit('setAddress', accounts[0]);

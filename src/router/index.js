@@ -1,12 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import TestPage from '../views/TestPage'
+import JobSeekerPage from '../views/JobSeekerPage'
+import EmployerPage from '../views/EmployerPage'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: TestPage
+    name: 'JobSeekerPage',
+    component: JobSeekerPage
   },
+  {
+    path: '/EmployerPage',
+    name: 'EmployerPage',
+    component: EmployerPage
+  }
 ]
 
 const router = createRouter({
