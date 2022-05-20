@@ -325,7 +325,7 @@
         <div class="container">
         <h1>{{loading}}</h1>
         <!-- 이력서 목록 표시 -->
-        <h1>이력서 목록</h1>
+        <h1>나의 이력서</h1>
         <div>
             <li v-for="(resume,index) in $store.state.resumeList" :key="resume.key">
                 <div v-if="index % 4 ==0 && $store.state.isMetaMaskConnected == true">
@@ -365,8 +365,33 @@
         <br>
         
       </section>
-      <h1>이력서 전체목록</h1>
-      {{$store.state.allResumeList}}      
+      <h1>이력서 전체목록(총{{$store.state.resumeCount}}장)</h1>
+        <div>
+            <li v-for="(resume,index) in $store.state.allResumeList" :key="resume.key">
+                <div v-if="index % 4 ==0">
+                    <div id="box">
+                      <img class="img" src="" alt="">
+                      <h1 class="heading">{{ }}</h1>
+                      <div class="data">
+                        <span class="date">{{ }}</span>
+                        <span class="user-id">{{$store.state.allResumeList[index].name }}</span>
+                        <span>연락처:{{$store.state.allResumeList[index].phone}}</span>
+                        <span>이메일:{{$store.state.allResumeList[index].email}}</span>
+                        <span>LinkedIn:{{$store.state.allResumeList[index].socialUrl}}</span>
+                        <span>지역:{{$store.state.allResumeList[index].location}}</span>
+                        <span>{{$store.state.allResumeList[index+1].institute}}졸업({{$store.state.allResumeList[index+1].startDate}}~{{$store.state.allResumeList[index+1].endDate}})</span>
+                        <span>{{$store.state.allResumeList[index+1].faculty}}{{$store.state.allResumeList[index+1].major}}{{$store.state.allResumeList[index+1].degree}}</span>
+                        <span>최종학점:{{$store.state.allResumeList[index+1].gpa}}</span>
+                        <span v-if="$store.state.allResumeList[index+2].companyName != undefined">{{$store.state.allResumeList[index+2].companyName}}근무({{$store.state.allResumeList[index+2].startDate}}~{{$store.state.allResumeList[index+2].endDate}}/{{$store.state.allResumeList[index+2].position}})</span>
+                        <span v-if="$store.state.allResumeList[index+3].skillName != undefined">{{$store.state.allResumeList[index+3].skillName}}취득({{$store.state.allResumeList[index+3].date}})</span>
+                      </div>
+                      <p class="texts">
+                        {{ }}
+                      </p>
+                    </div>
+                </div>
+            </li>
+        </div>    
     </div>
 </template>
 
@@ -603,8 +628,7 @@
                 let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress);
                 const addresslist = await ResumeContract.methods.getUsers().call(); 
                 const resumeCount = await ResumeContract.methods.resumeCount().call();
-                console.log(resumeCount);
-                console.log(addresslist);
+                this.$store.state.resumeCount = resumeCount;
                 for(let i=0;i<addresslist.length;i++){
                     let personalInfo = await ResumeContract.methods.getPersonalInfo().call({
                         from: addresslist[i] //msg.sender
@@ -978,7 +1002,7 @@ text-align: center;
 .balloon_04 {
  position:relative;
  margin: 50px;
- margin-left: 20cm;
+ margin-left: 60%;
  width: 320px;
  height:250px;
   background: rgba(197, 221, 246, 0.4);
