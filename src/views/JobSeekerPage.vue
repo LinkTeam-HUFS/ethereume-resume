@@ -4,151 +4,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 
-<!-- 이력서 수정페이지 -->
-<div class="background" v-if="isResumeOpen == true"> 
-    <div class="modal">
-        <div>
-            <button class="close" @click="resumeClosed">닫기</button>
-            <div>
-                <h2>인적사항</h2>
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4].picUrl"
-                    @input="$store.state.resumeList[currentIndex*4].picUrl = $event.target.value"
-                    type="text" 
-                    placeholder="picUrl"
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4].name"
-                    @input="$store.state.resumeList[currentIndex*4].name = $event.target.value"
-                    type="text" 
-                    placeholder="name"
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4].phone"
-                    @input="$store.state.resumeList[currentIndex*4].phone = $event.target.value"
-                    type="text" 
-                    placeholder="phone"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4].email"
-                    @input="$store.state.resumeList[currentIndex*4].email = $event.target.value"
-                    type="text" 
-                    placeholder="email"                   
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4].dateOfBirth"
-                    @input="$store.state.resumeList[currentIndex*4].dateOfBirth = $event.target.value"
-                    type="text" 
-                    placeholder="dateOfBirth"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4].socialUrl"
-                    @input="$store.state.resumeList[currentIndex*4].socialUrl = $event.target.value"
-                    type="text" 
-                    placeholder="socialUrl"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4].location"
-                    @input="$store.state.resumeList[currentIndex*4].location = $event.target.value"
-                    type="text" 
-                    placeholder="location"                    
-                />
-                <br>
-                <h2>학력사항</h2>
-                <input
-                    :value="$store.state.resumeList[currentIndex*4 + 1].startDate"
-                    @input="$store.state.resumeList[currentIndex*4 + 1].startDate = $event.target.value"
-                    type="text" 
-                    placeholder="startDate"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 1].endDate"
-                    @input="$store.state.resumeList[currentIndex*4 + 1].endDate = $event.target.value"
-                    type="text" 
-                    placeholder="endDate"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 1].institute"
-                    @input="$store.state.resumeList[currentIndex*4 + 1].institute = $event.target.value"
-                    type="text" 
-                    placeholder="institute"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 1].degree"
-                    @input="$store.state.resumeList[currentIndex*4 + 1].degree = $event.target.value"
-                     type="text" 
-                    placeholder="degree"                   
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 1].faculty"
-                    @input="$store.state.resumeList[currentIndex*4 + 1].faculty = $event.target.value"
-                    type="text" 
-                    placeholder="faculty"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 1].major"
-                    @input="$store.state.resumeList[currentIndex*4 + 1].major = $event.target.value"
-                    type="text" 
-                    placeholder="major"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 1].gpa"
-                    @input="$store.state.resumeList[currentIndex*4 + 1].gpa = $event.target.value"
-                    type="text" 
-                    placeholder="gpa"                    
-                />
-                <br>
-                <h2>경력사항</h2>
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 2].startDate"
-                    @input="$store.state.resumeList[currentIndex*4 + 2].startDate = $event.target.value"
-                    type="text" 
-                    placeholder="startDate"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 2].endDate"
-                    @input="$store.state.resumeList[currentIndex*4 + 2].endDate = $event.target.value"
-                    type="text" 
-                    placeholder="endDate"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 2].companyName"
-                    @input="$store.state.resumeList[currentIndex*4 + 2].companyName = $event.target.value"
-                    type="text" 
-                    placeholder="companyName"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 2].position"
-                    @input="$store.state.resumeList[currentIndex*4 + 2].position = $event.target.value"
-                    type="text" 
-                    placeholder="position"                    
-                />
-                <br>
-                <h2>자격증 및 수상 경력</h2>
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 3].skillName"
-                    @input="$store.state.resumeList[currentIndex*4 + 3].skillName = $event.target.value"
-                    type="text" 
-                    placeholder="skillName"                   
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 3].level"
-                    @input="$store.state.resumeList[currentIndex*4 + 3].level = $event.target.value"
-                    type="text" 
-                    placeholder="level"                    
-                />
-                <input 
-                    :value="$store.state.resumeList[currentIndex*4 + 3].date"
-                    @input="$store.state.resumeList[currentIndex*4 + 3].date = $event.target.value"
-                    type="text" 
-                    placeholder="date"                    
-                />
-                <br>
-                <button @click="updateResume">이력서 수정</button>
-            </div>
-        </div>                   
-    </div>    
-</div>
 <!-- 메인페이지 -->
 
 <div style="overflow:auto" class="main-all">
@@ -399,6 +254,177 @@
             </li>
         </div>     -->
     </div>
+
+    <!-- 이력서 수정페이지 -->
+    <div class="background" v-if="isResumeOpen == true"> 
+    <div class="modal" style="overflow: auto">
+        <div>
+            <div>
+                <h2>인적사항</h2>
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].picUrl"
+                    @input="$store.state.resumeList[currentIndex*4].picUrl = $event.target.value"
+                    type="text" 
+                    placeholder="picUrl"
+                    class="ui modaltextbox1"
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].name"
+                    @input="$store.state.resumeList[currentIndex*4].name = $event.target.value"
+                    type="text" 
+                    placeholder="name"
+                    class="ui modaltextbox1"
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].phone"
+                    @input="$store.state.resumeList[currentIndex*4].phone = $event.target.value"
+                    type="text" 
+                    placeholder="phone"    
+                    class="ui modaltextbox1"            
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].email"
+                    @input="$store.state.resumeList[currentIndex*4].email = $event.target.value"
+                    type="text" 
+                    placeholder="email"          
+                    class="ui modaltextbox1"      
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].dateOfBirth"
+                    @input="$store.state.resumeList[currentIndex*4].dateOfBirth = $event.target.value"
+                    type="text" 
+                    placeholder="dateOfBirth" 
+                    class="ui modaltextbox1"                
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].socialUrl"
+                    @input="$store.state.resumeList[currentIndex*4].socialUrl = $event.target.value"
+                    type="text" 
+                    placeholder="socialUrl" 
+                    class="ui modaltextbox1"              
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4].location"
+                    @input="$store.state.resumeList[currentIndex*4].location = $event.target.value"
+                    type="text" 
+                    placeholder="location"      
+                    class="ui modaltextbox1"         
+                />
+                <br>
+                <h2>학력사항</h2>
+                <input
+                    :value="$store.state.resumeList[currentIndex*4 + 1].startDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].startDate = $event.target.value"
+                    type="text" 
+                    placeholder="startDate"       
+                    class="ui modaltextbox2"          
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].endDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].endDate = $event.target.value"
+                    type="text" 
+                    placeholder="endDate"    
+                    class="ui modaltextbox2"                 
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].institute"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].institute = $event.target.value"
+                    type="text" 
+                    placeholder="institute"  
+                    class="ui modaltextbox2"             
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].degree"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].degree = $event.target.value"
+                     type="text" 
+                    placeholder="degree"     
+                    class="ui modaltextbox2"           
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].faculty"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].faculty = $event.target.value"
+                    type="text" 
+                    placeholder="faculty"       
+                    class="ui modaltextbox2"          
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].major"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].major = $event.target.value"
+                    type="text" 
+                    placeholder="major"        
+                    class="ui modaltextbox2"        
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 1].gpa"
+                    @input="$store.state.resumeList[currentIndex*4 + 1].gpa = $event.target.value"
+                    type="text" 
+                    placeholder="gpa"     
+                    class="ui modaltextbox2"       
+                />
+                <br>
+                <h2>경력사항</h2>
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].startDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].startDate = $event.target.value"
+                    type="text" 
+                    placeholder="startDate" 
+                    class="ui modaltextbox3"                       
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].endDate"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].endDate = $event.target.value"
+                    type="text" 
+                    placeholder="endDate"      
+                    class="ui modaltextbox3"   
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].companyName"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].companyName = $event.target.value"
+                    type="text" 
+                    placeholder="companyName"    
+                    class="ui modaltextbox3"     
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 2].position"
+                    @input="$store.state.resumeList[currentIndex*4 + 2].position = $event.target.value"
+                    type="text" 
+                    placeholder="position"     
+                    class="ui modaltextbox3"    
+                />
+                <br>
+                <h2>자격증 및 수상 경력</h2>
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 3].skillName"
+                    @input="$store.state.resumeList[currentIndex*4 + 3].skillName = $event.target.value"
+                    type="text" 
+                    placeholder="skillName"    
+                    class="ui modaltextbox4"     
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 3].level"
+                    @input="$store.state.resumeList[currentIndex*4 + 3].level = $event.target.value"
+                    type="text" 
+                    placeholder="level"      
+                    class="ui modaltextbox4"  
+                />
+                <input 
+                    :value="$store.state.resumeList[currentIndex*4 + 3].date"
+                    @input="$store.state.resumeList[currentIndex*4 + 3].date = $event.target.value"
+                    type="text" 
+                    placeholder="date"      
+                    class="ui modaltextbox4"     
+                />
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button class="ui button modalbutton" @click="updateResume">이력서 수정</button>
+                <button class="ui button modalbutton" @click="resumeClosed">닫기</button>
+            </div>
+        </div>                   
+    </div>    
+</div>
 </template>
 
 <script lang="js">
@@ -744,15 +770,18 @@ li {
     position: fixed;
 }
 .modal {
-    width: 600px;
-    height: 800px;
-    background: white;
+    width: 500px;
+    height: 750px;
+    background: linear-gradient(90deg,#cfecff,#e6d8fe);
+    color: #000;
     border-radius: 8px;
     padding: 20px;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 1050;
+    display: inline-block;
 }
 
 .ui.button.mainbutton{
@@ -1024,6 +1053,83 @@ text-align: center;
  top:10px;
  right:-15px;
 }
- 
+
+ .ui.button.modalbutton{
+    background: #3d7aed;
+    background: linear-gradient(90deg,#66b6ea,#8743ff);
+    border-radius: 1.3em;
+    box-shadow: 0 10px 30px 2px rgb(159 191 255 / 40%);
+    color: #fff;
+    font-family: M PLUS Rounded\ 1c,sans-serif;
+    font-size: 16px;
+    margin: 1em 0;
+    min-width: 50px;
+    mix-blend-mode: multiply;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+.ui.button:hover {
+  transition: transform 1s;
+  filter: brightness(80%);
+}
+
+
+.ui.modaltextbox1{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 0.35cm;
+}
+.ui.modaltextbox1:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
+}
+
+.ui.modaltextbox2{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 0.35cm;
+}
+.ui.modaltextbox2:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
+}
+
+.ui.modaltextbox3{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 0.35cm;
+}
+.ui.modaltextbox3:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
+}
+
+.ui.modaltextbox4{
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #66b6ea;
+    margin-right: 2cm;
+    margin-left: 2cm;
+    font-family: 'Jua', sans-serif;
+    margin-top: 0.35cm;
+}
+.ui.modaltextbox4:hover {
+  transition: transform 1s;
+  filter: brightness(90%);
+}
 
 </style>
