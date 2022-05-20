@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import JobSeekerPage from '../views/JobSeekerPage'
 import EmployerPage from '../views/EmployerPage'
+import DidPage from '../views/DidPage.vue'
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: '/EmployerPage',
     name: 'EmployerPage',
     component: EmployerPage
+  },
+  {
+    path: '/DidPage',
+    name: 'DidPage',
+    component: DidPage
   }
 ]
 
