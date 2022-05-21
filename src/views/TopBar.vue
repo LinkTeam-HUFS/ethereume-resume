@@ -11,7 +11,7 @@
 
           <ul class="app--navbar reset-list un-select">
             <li>
-              <a href="/">DID</a>
+              <router-link to="/DidPage">DID</router-link>
             </li>
             <li>
               <a href="/">Profile</a>
