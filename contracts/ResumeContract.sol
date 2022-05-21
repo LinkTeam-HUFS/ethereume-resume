@@ -45,6 +45,9 @@ contract ResumeContract is Ownable {
 		bytes32 skillName; // 자격증명, 수상명
 		bytes32 level; // 취득 자격 종류, 수상 종류
 		bytes32 date; // 취득 일자
+		bytes32 resumeTitle; // 이력서 제목
+		bytes32 summary; // 자기소개 요약
+		bytes32 motive; // 지원 동기
 		bool isNotEmpty;
 	}
 
@@ -58,41 +61,33 @@ contract ResumeContract is Ownable {
 	}
 
 	mapping (address => ResumeModel) mResumeModels;
-	mapping(address => uint) registerd;
+
+	mapping (address => bool) registered;
 	address[] public registeredArray;
-	uint public resumeCount = 0;
-	function getUsers() public view returns (address[] memory){
-		return registeredArray;
-	}
 
 	// 구직자 이력서 생성
-	function addPersonalInfo(bytes32 picUrl, bytes32 name, bytes32 phone, bytes32 email, bytes32 dateOfBirth, bytes32 socialUrl, bytes32 location) public returns (bool) {
-		PersonalInfo memory info = PersonalInfo(picUrl, name, phone, email, dateOfBirth, socialUrl, location);
-		mResumeModels[msg.sender].personalInfos.push(info);
-		mResumeModels[msg.sender].isNotEmpty = true;
-		return true;
-	}
-	function addEducation(bytes32 startDate, bytes32 endDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa) public returns (bool) {
-		Education memory edu = Education(startDate, endDate, institute, degree, faculty, major, gpa, true);
-		mResumeModels[msg.sender].educations.push(edu);
-		mResumeModels[msg.sender].isNotEmpty = true;
-		return true;
-	}
-	function addExperience(bytes32 startDate, bytes32 endDate, bytes32 companyName, bytes32 position) public returns (bool) {
-		Experience memory exp = Experience(startDate, endDate, companyName, position, true);
-		mResumeModels[msg.sender].experiences.push(exp);
-		mResumeModels[msg.sender].isNotEmpty = true;
-		return true;
-	}
-	function addSkill(bytes32 skill, bytes32 level, bytes32 date) public returns (bool) {
-		Skill memory skillStruct = Skill(skill, level, date, true);
-		mResumeModels[msg.sender].skills.push(skillStruct);
-		mResumeModels[msg.sender].isNotEmpty = true;
-    	if(registerd[msg.sender] != 1) {
-        	registerd[msg.sender] = 1;
-        	registeredArray.push(msg.sender); // push to the array
+	function checkUser(address _address) public {
+		if(!registered[_address]) {
+			registered[_address] = true;
+			registeredArray.push(_address);
 		}
-		resumeCount++;
+	}
+
+	function add(PersonalInfo memory inf, Experience memory exp, Education memory edu, Skill memory ski) public returns (bool) {
+		PersonalInfo memory info = inf;
+		Experience memory expr = exp;
+		Education memory educ = edu;
+		Skill memory skil = ski;
+		
+		mResumeModels[msg.sender].personalInfos.push(info);
+		mResumeModels[msg.sender].experiences.push(expr);
+		mResumeModels[msg.sender].educations.push(educ);
+		mResumeModels[msg.sender].skills.push(skil);
+
+		mResumeModels[msg.sender].isNotEmpty = true;
+
+		checkUser(msg.sender);
+
 		return true;
 	}
 
@@ -101,54 +96,50 @@ contract ResumeContract is Ownable {
 		if(mResumeModels[msg.sender].personalInfos.length > index) {
 			PersonalInfo memory info = PersonalInfo(picUrl, name, phone, email, dateOfBirth, socialUrl, location);
 			mResumeModels[msg.sender].personalInfos[index] = info;
-		
 			return true;
 		}
 		return false;
 	}
-	function updateEducation(bytes32 eduStartDate, bytes32 eduEndDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].personalInfos.length > index) {			
-			Education memory edu = Education(eduStartDate, eduEndDate, institute, degree, faculty, major, gpa, true);
-			mResumeModels[msg.sender].educations[index] = edu;		
+	function updateEducation(bytes32 startDate, bytes32 endDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint index) public returns (bool) {
+		if(mResumeModels[msg.sender].educations.length > index) {
+			Education memory edu = Education(startDate, endDate, institute, degree, faculty, major, gpa, true);
+			mResumeModels[msg.sender].educations[index] = edu;
 			return true;
 		}
 		return false;
 	}
-	function updateExperience(bytes32 expStartDate, bytes32 expEndDate, bytes32 companyName, bytes32 position, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].personalInfos.length > index) {
-			Experience memory exp = Experience(expStartDate, expEndDate, companyName, position, true);
-			mResumeModels[msg.sender].experiences[index] = exp;			
-		
+	
+	function updateExperience(bytes32 startDate, bytes32 endDate, bytes32 companyName, bytes32 position, uint index) public returns (bool) {
+		if(mResumeModels[msg.sender].experiences.length > index) {
+			Experience memory exp = Experience(startDate, endDate, companyName, position, true);
+			mResumeModels[msg.sender].experiences[index] = exp;
 			return true;
 		}
 		return false;
 	}
-	function updateSkill(bytes32 skill, bytes32 level, bytes32 date, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].personalInfos.length > index) {			
-			Skill memory skillStruct = Skill(skill, level, date, true);
+	function updateSkill(bytes32 skill, bytes32 level, bytes32 date, uint index, bytes32 resumeTitle, bytes32 summary, bytes32 motive) public returns (bool) {
+		if(mResumeModels[msg.sender].skills.length > index) {
+			Skill memory skillStruct = Skill(skill, level, date, resumeTitle, summary, motive, true);
 			mResumeModels[msg.sender].skills[index] = skillStruct;
-		
 			return true;
 		}
 		return false;
 	}
 
 	// 이력서 정보 확인
-	function getPersonalInfo() external view returns(PersonalInfo[] memory) {
+	function getPersonalInfo() external view returns (PersonalInfo[] memory) {
 		return mResumeModels[msg.sender].personalInfos;
 	}
-
 	function getEducation() public view returns (Education[] memory) {
 		return mResumeModels[msg.sender].educations;
 	}
-
 	function getExperience() public view returns (Experience[] memory) {
-		return  mResumeModels[msg.sender].experiences;
+		return mResumeModels[msg.sender].experiences;
+	}
+	function getSkill() public view returns (Skill[] memory) {
+		return mResumeModels[msg.sender].skills;
 	}
 
-	function getSkill() public view returns (Skill[] memory) {
-		return  mResumeModels[msg.sender].skills;
-	}
 	// 이력서 전체 불러오기
 	function getAllPersonalInfo()  external view returns (PersonalInfo[][] memory) {
 		PersonalInfo[][] memory allPersonalInfos;
@@ -188,84 +179,14 @@ contract ResumeContract is Ownable {
 				mResumeModels[msg.sender].experiences[i] = mResumeModels[msg.sender].experiences[i+1];
 				mResumeModels[msg.sender].skills[i] = mResumeModels[msg.sender].skills[i+1];
 			}
+
 			mResumeModels[msg.sender].personalInfos.pop();
 			mResumeModels[msg.sender].educations.pop();
 			mResumeModels[msg.sender].experiences.pop();
 			mResumeModels[msg.sender].skills.pop();
 	
-			return true;	
+			return true;
 		}
-		resumeCount--;
 		return false;
-	}
-
-	event personalInfoEvent(bytes32 picUrl, bytes32 name, bytes32 phone, bytes32 email, bytes32 dateOfBirth, bytes32 socialUrl, bytes32 location);
-
-	event educationEvent(bytes32 eduStartDate, bytes32 eduEndDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint count, uint index);
-		 
-	event experienceEvent(bytes32 expStartDate, bytes32 expEndDate, bytes32 companyName, bytes32 position, uint count, uint index);
-
-	event skillEvent(bytes32 skillName, bytes32 level, bytes32 date, uint count, uint index);
-
-	event resumeEmptyEvent();
-
-
-	function triggerGetResumeByEvent(address accountId) public {
-		if(mResumeModels[accountId].isNotEmpty){
-			triggerGetPersonalInfoByEvent(accountId);
-			triggerGetExperienceByEvent(accountId);
-			triggerGetEducationByEvent(accountId);
-			triggerGetSkillByEvent(accountId);
-		}else{
-			emit resumeEmptyEvent();
-		}
-	}
-
-	function triggerGetPersonalInfoByEvent(address accountId) public {
-		if(mResumeModels[accountId].isNotEmpty) {
-			PersonalInfo[] memory info;
-			info = mResumeModels[accountId].personalInfos;
-
-			for(uint i=0; i < info.length; i++) {
-				PersonalInfo memory inf = info[i];
-				emit personalInfoEvent(inf.picUrl, inf.name, inf.phone, inf.email, inf.dateOfBirth, inf.socialUrl, inf.location);
-			}
-		}
-	}
-
-	function triggerGetEducationByEvent(address accountId) public {
-		if(mResumeModels[accountId].isNotEmpty) {
-			Education[] memory eduList;
-			eduList = mResumeModels[accountId].educations;
-
-			for(uint i=0; i < eduList.length; i++) {
-				Education memory edu = eduList[i];
-				emit educationEvent(edu.eduStartDate, edu.eduEndDate, edu.institute, edu.degree, edu.faculty, edu.major, edu.gpa, eduList.length, i);
-			}
-		}
-	}
-	
-	function triggerGetExperienceByEvent(address accountId) public {
-		if(mResumeModels[accountId].isNotEmpty) {
-			Experience[] memory expList;
-			expList = mResumeModels[accountId].experiences;
-
-			for(uint i=0; i < expList.length; i++) {
-				Experience memory exp = expList[i];
-				emit experienceEvent(exp.expStartDate, exp.expEndDate, exp.companyName, exp.position, expList.length, i);
-			}
-		}
-	}
-
-	function triggerGetSkillByEvent(address accountId) public {
-		if(mResumeModels[accountId].isNotEmpty) {
-			Skill[] memory skillList;
-			skillList = mResumeModels[accountId].skills;
-
-			for(uint i=0; i < skillList.length; i++) {
-				Skill memory skill = skillList[i];
-				emit skillEvent(skill.skillName, skill.level, skill.date, skillList.length, i);
-			}
-		}
 	}
 }

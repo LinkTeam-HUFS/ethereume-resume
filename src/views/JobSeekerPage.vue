@@ -491,45 +491,53 @@
                 else{
                     this.loading = 'Transaction request is being processed'
                     let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress)
-                    let contractPersonalInfo = await ResumeContract.methods.addPersonalInfo(
-                        //Change String type to Bytes32 type
+                    const PersonalInfo = [
                         ethers.utils.formatBytes32String(this.picUrl),
                         ethers.utils.formatBytes32String(this.name),
-                        ethers.utils.formatBytes32String(this.phone),
+                        ethers.utils.formatBytes32String(this.phone),  
                         ethers.utils.formatBytes32String(this.email),
                         ethers.utils.formatBytes32String(this.dateOfBirth),
                         ethers.utils.formatBytes32String(this.socialUrl),
-                        ethers.utils.formatBytes32String(this.location))
-                    .send({
-                        from: this.$store.state.address //msg.sender
-                    })
-                    let contractEducation = await ResumeContract.methods.addEducation(
+                        ethers.utils.formatBytes32String(this.location),
+                    ]
+                    const Education = [
                         ethers.utils.formatBytes32String(this.startDate_Edu),
                         ethers.utils.formatBytes32String(this.endDate_Edu),
-                        ethers.utils.formatBytes32String(this.institute),
+                        ethers.utils.formatBytes32String(this.institute),  
                         ethers.utils.formatBytes32String(this.degree),
                         ethers.utils.formatBytes32String(this.faculty),
                         ethers.utils.formatBytes32String(this.major),
-                        ethers.utils.formatBytes32String(this.gpa))
-                    .send({
-                        from: this.$store.state.address //msg.sender
-                    })
-                    let contractExperience = await ResumeContract.methods.addExperience(
+                        ethers.utils.formatBytes32String(this.gpa),
+                        true
+                    ]
+                    const Experience = [
                         ethers.utils.formatBytes32String(this.startDate_Ex),
                         ethers.utils.formatBytes32String(this.endDate_Ex),
-                        ethers.utils.formatBytes32String(this.companyName),
-                        ethers.utils.formatBytes32String(this.position))
+                        ethers.utils.formatBytes32String(this.companyName),  
+                        ethers.utils.formatBytes32String(this.position),
+                        true
+                    ]
+                    const Skill = [
+                        ethers.utils.formatBytes32String(this.skillName),
+                        ethers.utils.formatBytes32String(this.level),
+                        ethers.utils.formatBytes32String(this.date),
+                        ethers.utils.formatBytes32String(this.date),
+                        ethers.utils.formatBytes32String(this.date),
+                        ethers.utils.formatBytes32String(this.date),
+                        true  
+                    ]
+                    console.log(PersonalInfo)
+                    console.log(Education)
+                    console.log(Experience)
+                    console.log(Skill)
+
+                    let contractPersonalInfo = await ResumeContract.methods.add(
+                        PersonalInfo,Experience,Education,Skill
+                    )
                     .send({
                         from: this.$store.state.address //msg.sender
                     })
-                    let contractSkill = await ResumeContract.methods.addSkill(
-                        ethers.utils.formatBytes32String(this.skillName),
-                        ethers.utils.formatBytes32String(this.level),
-                        ethers.utils.formatBytes32String(this.date))
-                    .send({
-                        from: this.$store.state.address //msg.sender
-                    })                    
-                    if (contractPersonalInfo && contractEducation && contractExperience && contractSkill) {
+                    if (contractPersonalInfo) {
                         this.loading = 'add completed'
                         window.location.reload();
                     }
