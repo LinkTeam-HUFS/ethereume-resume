@@ -224,35 +224,7 @@
         <br>
         <br>
         <br>
-        
       </section>
-      <!-- <h1>이력서 전체목록(총{{$store.state.resumeCount}}장)</h1>
-        <div>
-            <li v-for="(resume,index) in $store.state.allResumeList" :key="resume.key">
-                <div v-if="index % 4 ==0">
-                    <div id="box">
-                      <img class="img" src="" alt="">
-                      <h1 class="heading">{{ }}</h1>
-                      <div class="data">
-                        <span class="date">{{ }}</span>
-                        <span class="user-id">{{$store.state.allResumeList[index].name }}</span>
-                        <span>연락처:{{$store.state.allResumeList[index].phone}}</span>
-                        <span>이메일:{{$store.state.allResumeList[index].email}}</span>
-                        <span>LinkedIn:{{$store.state.allResumeList[index].socialUrl}}</span>
-                        <span>지역:{{$store.state.allResumeList[index].location}}</span>
-                        <span>{{$store.state.allResumeList[index+1].institute}}졸업({{$store.state.allResumeList[index+1].startDate}}~{{$store.state.allResumeList[index+1].endDate}})</span>
-                        <span>{{$store.state.allResumeList[index+1].faculty}}{{$store.state.allResumeList[index+1].major}}{{$store.state.allResumeList[index+1].degree}}</span>
-                        <span>최종학점:{{$store.state.allResumeList[index+1].gpa}}</span>
-                        <span v-if="$store.state.allResumeList[index+2].companyName != undefined">{{$store.state.allResumeList[index+2].companyName}}근무({{$store.state.allResumeList[index+2].startDate}}~{{$store.state.allResumeList[index+2].endDate}}/{{$store.state.allResumeList[index+2].position}})</span>
-                        <span v-if="$store.state.allResumeList[index+3].skillName != undefined">{{$store.state.allResumeList[index+3].skillName}}취득({{$store.state.allResumeList[index+3].date}})</span>
-                      </div>
-                      <p class="texts">
-                        {{ }}
-                      </p>
-                    </div>
-                </div>
-            </li>
-        </div>     -->
     </div>
 
     <!-- 이력서 수정페이지 -->
@@ -526,10 +498,6 @@
                         ethers.utils.formatBytes32String(this.date),
                         true  
                     ]
-                    console.log(PersonalInfo)
-                    console.log(Education)
-                    console.log(Experience)
-                    console.log(Skill)
 
                     let contractPersonalInfo = await ResumeContract.methods.add(
                         PersonalInfo,Experience,Education,Skill
@@ -545,45 +513,49 @@
             },
             async updateResume() {
                 let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress)
-                let updatePersonalInfo = await ResumeContract.methods.updatePersonalInfo(
-                    //Change String type to Bytes32 type
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].picUrl),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].name),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].phone),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].email),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].dateOfBirth),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].socialUrl),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].location),this.currentIndex)
+                    const PersonalInfo = [
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].picUrl),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].name),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].phone),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].email),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].dateOfBirth),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].socialUrl),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4].location)
+                    ]
+                    const Education = [
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].startDate),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].endDate),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].institute),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].degree),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].faculty),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].major),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].gpa),
+                        true
+                    ]
+                    const Experience = [
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].startDate),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].endDate),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].companyName),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].position),
+                        true
+                    ]
+                    const Skill = [
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].skillName),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].level),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].date),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].date),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].date),
+                        ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].date),
+                        true  
+                    ]
+                let update = await ResumeContract.methods.update(
+                    PersonalInfo, Experience, Education, Skill, this.currentIndex
+                )
                 .send({
                     from: this.$store.state.address //msg.sender
                 })
-                let updateEducation = await ResumeContract.methods.updateEducation(
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].startDate),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].endDate),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].institute),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].degree),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].faculty),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].major),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 1].gpa),this.currentIndex)
-                .send({
-                    from: this.$store.state.address //msg.sender
-                })
-                let updateExperience = await ResumeContract.methods.updateExperience(
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].startDate),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].endDate),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].companyName),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 2].position),this.currentIndex)
-                .send({
-                    from: this.$store.state.address //msg.sender
-                })
-                let updateSkill = await ResumeContract.methods.updateSkill(
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].skillName),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].level),
-                    ethers.utils.formatBytes32String(this.$store.state.resumeList[this.currentIndex*4 + 3].date),this.currentIndex)
-                .send({
-                    from: this.$store.state.address //msg.sender
-                })                    
-                if (updatePersonalInfo && updateEducation && updateExperience && updateSkill) {
+          
+                if (update) {
                     window.location.reload();
                 }
             },
@@ -664,63 +636,6 @@
                     this.$store.commit('setResume', payload);
                 }
             },
-            // async getAllValue(){
-            //     let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress);
-            //     const addresslist = await ResumeContract.methods.getUsers().call(); 
-            //     const resumeCount = await ResumeContract.methods.resumeCount().call();
-            //     this.$store.state.resumeCount = resumeCount;
-            //     for(let i=0;i<addresslist.length;i++){
-            //         let personalInfo = await ResumeContract.methods.getPersonalInfo().call({
-            //             from: addresslist[i] //msg.sender
-            //         })
-            //         let education = await ResumeContract.methods.getEducation().call({
-            //             from: addresslist[i] //msg.sender
-            //         })
-            //         let experience = await ResumeContract.methods.getExperience().call({
-            //             from: addresslist[i] //msg.sender
-            //         })
-            //         let skill = await ResumeContract.methods.getSkill().call({
-            //             from: addresslist[i] //msg.sender
-            //         })
-            //         for(let j=0; j<personalInfo.length ;j++){
-            //             const payload = {
-            //             //Change Bytes32 type to String type
-            //                 'picUrl': ethers.utils.parseBytes32String(personalInfo[j][0]),
-            //                 'name': ethers.utils.parseBytes32String(personalInfo[j][1]),
-            //                 'phone': ethers.utils.parseBytes32String(personalInfo[j][2]),  
-            //                 'email': ethers.utils.parseBytes32String(personalInfo[j][3]),
-            //                 'dateOfBirth': ethers.utils.parseBytes32String(personalInfo[j][4]),
-            //                 'socialUrl': ethers.utils.parseBytes32String(personalInfo[j][5]),
-            //                 'location': ethers.utils.parseBytes32String(personalInfo[j][6]),
-            //             }
-            //             this.$store.commit('setAllResume', payload);
-            //             const payload2 = {
-            //                 'startDate': ethers.utils.parseBytes32String(education[j][0]),
-            //                 'endDate': ethers.utils.parseBytes32String(education[j][1]),
-            //                 'institute': ethers.utils.parseBytes32String(education[j][2]),  
-            //                 'degree': ethers.utils.parseBytes32String(education[j][3]),
-            //                 'faculty': ethers.utils.parseBytes32String(education[j][4]),
-            //                 'major': ethers.utils.parseBytes32String(education[j][5]),
-            //                 'gpa': ethers.utils.parseBytes32String(education[j][6]),
-            //             }
-            //             this.$store.commit('setAllResume', payload2);
-            //             const payload3 = {
-            //                 'startDate': ethers.utils.parseBytes32String(experience[j][0]),
-            //                 'endDate': ethers.utils.parseBytes32String(experience[j][1]),
-            //                 'companyName': ethers.utils.parseBytes32String(experience[j][2]),  
-            //                 'position': ethers.utils.parseBytes32String(experience[j][3]),
-            //             }
-            //             this.$store.commit('setAllResume', payload3);
-            //             const payload4 = {
-            //                 'skillName': ethers.utils.parseBytes32String(skill[j][0]),
-            //                 'level': ethers.utils.parseBytes32String(skill[j][1]),
-            //                 'date': ethers.utils.parseBytes32String(skill[j][2]),  
-            //             }
-            //             this.$store.commit('setAllResume', payload4);                                                
-            //         }
-            //     }
-            // },
-            //메타마스크 지갑 연결
             async connectWallet() {
             const accounts = await (window).ethereum.request({ method: 'eth_requestAccounts'});
             address.value = accounts[0];

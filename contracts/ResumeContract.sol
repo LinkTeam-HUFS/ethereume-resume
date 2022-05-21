@@ -94,37 +94,18 @@ contract ResumeContract is Ownable {
 	}
 
 	// 구직자 이력서 수정
-	function updatePersonalInfo(bytes32 picUrl, bytes32 name, bytes32 phone, bytes32 email, bytes32 dateOfBirth, bytes32 socialUrl, bytes32 location, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].personalInfos.length > index) {
-			PersonalInfo memory info = PersonalInfo(picUrl, name, phone, email, dateOfBirth, socialUrl, location);
+	function update(PersonalInfo memory inf, Experience memory exp, Education memory edu, Skill memory ski, uint index) public returns (bool){
+		PersonalInfo memory info = inf;
+		Experience memory expr = exp;
+		Education memory educ = edu;
+		Skill memory skil = ski;
+		if(mResumeModels[msg.sender].personalInfos.length > index && mResumeModels[msg.sender].educations.length > index && mResumeModels[msg.sender].experiences.length > index && mResumeModels[msg.sender].skills.length > index) {
 			mResumeModels[msg.sender].personalInfos[index] = info;
+			mResumeModels[msg.sender].educations[index] = educ;
+			mResumeModels[msg.sender].experiences[index] = expr;
+			mResumeModels[msg.sender].skills[index] = skil;
 			return true;
-		}
-		return false;
-	}
-	function updateEducation(bytes32 startDate, bytes32 endDate, bytes32 institute, bytes32 degree, bytes32 faculty, bytes32 major, bytes32 gpa, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].educations.length > index) {
-			Education memory edu = Education(startDate, endDate, institute, degree, faculty, major, gpa, true);
-			mResumeModels[msg.sender].educations[index] = edu;
-			return true;
-		}
-		return false;
-	}
-	
-	function updateExperience(bytes32 startDate, bytes32 endDate, bytes32 companyName, bytes32 position, uint index) public returns (bool) {
-		if(mResumeModels[msg.sender].experiences.length > index) {
-			Experience memory exp = Experience(startDate, endDate, companyName, position, true);
-			mResumeModels[msg.sender].experiences[index] = exp;
-			return true;
-		}
-		return false;
-	}
-	function updateSkill(bytes32 skill, bytes32 level, bytes32 date, uint index, bytes32 resumeTitle, bytes32 summary, bytes32 motive) public returns (bool) {
-		if(mResumeModels[msg.sender].skills.length > index) {
-			Skill memory skillStruct = Skill(skill, level, date, resumeTitle, summary, motive, true);
-			mResumeModels[msg.sender].skills[index] = skillStruct;
-			return true;
-		}
+		}		
 		return false;
 	}
 
@@ -140,36 +121,6 @@ contract ResumeContract is Ownable {
 	}
 	function getSkill() public view returns (Skill[] memory) {
 		return mResumeModels[msg.sender].skills;
-	}
-
-	// 이력서 전체 불러오기
-	function getAllPersonalInfo()  external view returns (PersonalInfo[][] memory) {
-		PersonalInfo[][] memory allPersonalInfos;
-		for(uint i = 0; i < registeredArray.length; i++) {
-			allPersonalInfos[i] = mResumeModels[registeredArray[i]].personalInfos;
-		}
-		return allPersonalInfos;
-	}
-	function getAllEducation()  external view returns (Education[][] memory) {
-		Education[][] memory allEducations;
-		for(uint i = 0; i < registeredArray.length; i++) {
-			allEducations[i] = mResumeModels[registeredArray[i]].educations;
-		}
-		return allEducations;
-	}
-	function getAllExperience()  external view returns (Experience[][] memory) {
-		Experience[][] memory allExperiences;
-		for(uint i = 0; i < registeredArray.length; i++) {
-			allExperiences[i] = mResumeModels[registeredArray[i]].experiences;
-		}
-		return allExperiences;
-	}
-	function getAllSkill()  external view returns (Skill[][] memory) {
-		Skill[][] memory allSkills;
-		for(uint i = 0; i < registeredArray.length; i++) {
-			allSkills[i] = mResumeModels[registeredArray[i]].skills;
-		}
-		return allSkills;
 	}
 
 	// 구직자 이력서 삭제
