@@ -62,15 +62,13 @@ contract ResumeContract is Ownable {
 
 	mapping (address => ResumeModel) mResumeModels;
 
-	mapping (address => bool) registered;
+	mapping (address => uint) registerd;
 	address[] public registeredArray;
+	uint public resumeCount = 0;
 
 	// 구직자 이력서 생성
-	function checkUser(address _address) public {
-		if(!registered[_address]) {
-			registered[_address] = true;
-			registeredArray.push(_address);
-		}
+	function getUsers() public view returns (address[] memory){
+		return registeredArray;
 	}
 
 	function add(PersonalInfo memory inf, Experience memory exp, Education memory edu, Skill memory ski) public returns (bool) {
@@ -86,7 +84,11 @@ contract ResumeContract is Ownable {
 
 		mResumeModels[msg.sender].isNotEmpty = true;
 
-		checkUser(msg.sender);
+    	if(registerd[msg.sender] != 1) {
+        	registerd[msg.sender] = 1;
+        	registeredArray.push(msg.sender); // push to the array
+		}
+		resumeCount++;
 
 		return true;
 	}
@@ -184,7 +186,8 @@ contract ResumeContract is Ownable {
 			mResumeModels[msg.sender].educations.pop();
 			mResumeModels[msg.sender].experiences.pop();
 			mResumeModels[msg.sender].skills.pop();
-	
+			resumeCount--;
+
 			return true;
 		}
 		return false;
