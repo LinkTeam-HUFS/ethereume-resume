@@ -283,6 +283,7 @@
     import Web3 from "web3";
     import ResumeContract from '../../build/contracts/ResumeContract.json';
     import TopBar from './TopBar.vue';
+    import { EthrDID } from 'ethr-did';
 
     const contractAddress = process.env.VUE_APP_CONTRACT_ADDRESS
     const ethers = require('ethers')
