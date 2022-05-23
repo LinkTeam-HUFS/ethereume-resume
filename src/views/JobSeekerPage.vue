@@ -194,7 +194,6 @@
                       <img class="img" src="" alt="">
                       <h1 class="heading">{{ }}</h1>
                       <div class="data">
-                        <span class="date">{{ }}</span>
                         <span class="user-id">{{$store.state.resumeList[index].name }}</span>
                         <span>연락처:{{$store.state.resumeList[index].phone}}</span>
                         <span>이메일:{{$store.state.resumeList[index].email}}</span>
@@ -403,6 +402,7 @@
     import { onMounted, ref } from '@vue/runtime-core'
     import { useStore } from 'vuex'
     //import { db } from "../firebase"
+    import { EthrDID } from 'ethr-did';
     import Web3 from "web3";
     import ResumeContract from '../../build/contracts/ResumeContract.json';
     import TopBar from './TopBar.vue';
@@ -462,6 +462,9 @@
                     alert('Connect MetaMask First');
                 }
                 else{
+                    const keypair = EthrDID.createKeyPair()
+                    const ethrDid = new EthrDID({...keypair})
+                    
                     this.loading = 'Transaction request is being processed'
                     let ResumeContract = new web3.eth.Contract(this.contractJson.abi, contractAddress)
                     const PersonalInfo = [
@@ -511,6 +514,7 @@
                     })
                     if (contractPersonalInfo) {
                         this.loading = 'add completed'
+                        this.$store.commit('appendDid',ethrDid.did);
                         window.location.reload();
                     }
                 }
