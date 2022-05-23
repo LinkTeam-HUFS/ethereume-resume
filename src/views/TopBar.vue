@@ -14,7 +14,7 @@
               <router-link to="/DidPage">DID</router-link>
             </li>
             <li>
-              <a href="/">Profile</a>
+              <a href="https://ropsten.etherscan.io/address/0x425E1733AA71131afc215cA0300218e794245d51" target="_blank">이력서 내역</a>
             </li>
             <li>
               <router-link to='/EmployerPage'>구인회사 페이지</router-link>

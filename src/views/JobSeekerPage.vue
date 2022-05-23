@@ -402,6 +402,7 @@
 <script lang="js">
     import { onMounted, ref } from '@vue/runtime-core'
     import { useStore } from 'vuex'
+    //import { db } from "../firebase"
     import Web3 from "web3";
     import ResumeContract from '../../build/contracts/ResumeContract.json';
     import TopBar from './TopBar.vue';
@@ -505,6 +506,9 @@
                     .send({
                         from: this.$store.state.address //msg.sender
                     })
+                    .on('transactionHash', function(hash){
+                        console.log(hash);
+                    })
                     if (contractPersonalInfo) {
                         this.loading = 'add completed'
                         window.location.reload();
@@ -554,6 +558,9 @@
                 .send({
                     from: this.$store.state.address //msg.sender
                 })
+                .on('transactionHash', function(hash){
+                    console.log(hash);
+                })
           
                 if (update) {
                     window.location.reload();
@@ -564,6 +571,9 @@
                 let isResumeDeleted = await ResumeContract.methods.remove(this.currentIndex)
                 .send({
                     from: this.$store.state.address //msg.sender
+                })
+                .on('transactionHash', function(hash){
+                    console.log(hash);
                 })
                 if(isResumeDeleted){
                     window.location.reload();
