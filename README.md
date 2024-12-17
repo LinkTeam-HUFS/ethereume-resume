@@ -1,6 +1,13 @@
-# register_login
+# 블록체인 이력서 작성 및 관리 서비스
+## Introduction
 
 ## Project setup
+
+## Project Overview
+
+## Preview
+
+[시연 동영상]
 
 ```
 npm install
@@ -8,7 +15,7 @@ npm install ganache-cli
 npm install -g truffle
 ```
 
-### Make .env at root directory
+### Configuration
 ```
 VUE_APP_FIREBASE_API_KEY = apiKey
 VUE_APP_AUTH_DOMAIN = authDomain
