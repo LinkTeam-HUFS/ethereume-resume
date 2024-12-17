@@ -21,13 +21,14 @@
 [시연 동영상]  
 https://youtu.be/v9JNHhN4CUY?si=TFwxpxcm42d21PS8
 
+## Getting Started
 ```
 npm install
 npm install ganache-cli
 npm install -g truffle
 ```
 
-### Configuration
+## Configuration
 ```
 VUE_APP_FIREBASE_API_KEY = apiKey
 VUE_APP_AUTH_DOMAIN = authDomain
