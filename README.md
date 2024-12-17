@@ -1,8 +1,6 @@
 # 블록체인 이력서 작성 및 관리 서비스
 ## Introduction
 
-## Project setup
-
 ## Project Overview
 
 ## Preview
