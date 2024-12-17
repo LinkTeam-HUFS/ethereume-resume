@@ -19,6 +19,7 @@
 ![image](https://github.com/user-attachments/assets/140bb07a-060c-4b89-a4d6-1bf591452920)
 
 [시연 동영상]  
+https://youtu.be/v9JNHhN4CUY?si=TFwxpxcm42d21PS8
 
 ```
 npm install
